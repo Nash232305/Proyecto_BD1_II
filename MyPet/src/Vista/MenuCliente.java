@@ -20,12 +20,19 @@ public class MenuCliente extends javax.swing.JFrame {
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
+        jButton2 = new javax.swing.JButton();
         jPanel1 = new javax.swing.JPanel();
         TituloLabel = new javax.swing.JLabel();
         Imagen = new javax.swing.JLabel();
         PCita = new javax.swing.JButton();
         CExpediente = new javax.swing.JButton();
         CCita = new javax.swing.JButton();
+        jButton3 = new javax.swing.JButton();
+
+        jButton2.setBackground(new java.awt.Color(153, 255, 255));
+        jButton2.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Imagenes/flecha-izquierda.png"))); // NOI18N
+        jButton2.setBorder(null);
+        jButton2.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
@@ -35,7 +42,7 @@ public class MenuCliente extends javax.swing.JFrame {
         TituloLabel.setFont(new java.awt.Font("Segoe UI", 1, 18)); // NOI18N
         TituloLabel.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         TituloLabel.setText("MENU CLIENTE");
-        jPanel1.add(TituloLabel, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 500, 80));
+        jPanel1.add(TituloLabel, new org.netbeans.lib.awtextra.AbsoluteConstraints(60, 0, 390, 80));
 
         Imagen.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         Imagen.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Imagenes/logo (1).png"))); // NOI18N
@@ -44,6 +51,7 @@ public class MenuCliente extends javax.swing.JFrame {
         jPanel1.add(Imagen, new org.netbeans.lib.awtextra.AbsoluteConstraints(300, 110, 180, 170));
 
         PCita.setBackground(new java.awt.Color(153, 255, 255));
+        PCita.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Imagenes/cita.png"))); // NOI18N
         PCita.setText("Programar citas");
         PCita.setBorder(new javax.swing.border.SoftBevelBorder(javax.swing.border.BevelBorder.RAISED));
         PCita.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
@@ -55,16 +63,24 @@ public class MenuCliente extends javax.swing.JFrame {
         jPanel1.add(PCita, new org.netbeans.lib.awtextra.AbsoluteConstraints(50, 130, 140, -1));
 
         CExpediente.setBackground(new java.awt.Color(153, 255, 255));
+        CExpediente.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Imagenes/expediente.png"))); // NOI18N
         CExpediente.setText("Consultar Expediente");
         CExpediente.setBorder(new javax.swing.border.SoftBevelBorder(javax.swing.border.BevelBorder.RAISED));
         CExpediente.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
         jPanel1.add(CExpediente, new org.netbeans.lib.awtextra.AbsoluteConstraints(50, 180, 140, -1));
 
         CCita.setBackground(new java.awt.Color(153, 255, 255));
+        CCita.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Imagenes/consulta.png"))); // NOI18N
         CCita.setText("Consultar Cita");
         CCita.setBorder(new javax.swing.border.SoftBevelBorder(javax.swing.border.BevelBorder.RAISED));
         CCita.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
         jPanel1.add(CCita, new org.netbeans.lib.awtextra.AbsoluteConstraints(50, 240, 140, -1));
+
+        jButton3.setBackground(new java.awt.Color(153, 255, 255));
+        jButton3.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Imagenes/flecha-izquierda.png"))); // NOI18N
+        jButton3.setBorder(null);
+        jButton3.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
+        jPanel1.add(jButton3, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 70, 60));
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
@@ -74,7 +90,7 @@ public class MenuCliente extends javax.swing.JFrame {
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(jPanel1, javax.swing.GroupLayout.DEFAULT_SIZE, 381, Short.MAX_VALUE)
+            .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, 319, javax.swing.GroupLayout.PREFERRED_SIZE)
         );
 
         pack();
@@ -126,6 +142,8 @@ public class MenuCliente extends javax.swing.JFrame {
     private javax.swing.JLabel Imagen;
     private javax.swing.JButton PCita;
     private javax.swing.JLabel TituloLabel;
+    private javax.swing.JButton jButton2;
+    private javax.swing.JButton jButton3;
     private javax.swing.JPanel jPanel1;
     // End of variables declaration//GEN-END:variables
 

@@ -33,6 +33,7 @@ public class MenuAdministracion extends javax.swing.JFrame {
         BProductos = new javax.swing.JButton();
         LabelImagen = new javax.swing.JLabel();
         jPanel2 = new javax.swing.JPanel();
+        jButton2 = new javax.swing.JButton();
         Titulo = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
@@ -75,26 +76,21 @@ public class MenuAdministracion extends javax.swing.JFrame {
 
         LabelImagen.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Imagenes/logo (1).png"))); // NOI18N
         LabelImagen.setText("jLabel2");
-        jPanel1.add(LabelImagen, new org.netbeans.lib.awtextra.AbsoluteConstraints(210, 80, 180, 170));
+        jPanel1.add(LabelImagen, new org.netbeans.lib.awtextra.AbsoluteConstraints(210, 70, 180, 170));
 
-        jPanel2.setBackground(new java.awt.Color(102, 255, 255));
+        jPanel2.setBackground(new java.awt.Color(153, 255, 255));
+        jPanel2.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
+
+        jButton2.setBackground(new java.awt.Color(153, 255, 255));
+        jButton2.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Imagenes/flecha-izquierda.png"))); // NOI18N
+        jButton2.setBorder(null);
+        jButton2.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
+        jPanel2.add(jButton2, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 70, 60));
 
         Titulo.setFont(new java.awt.Font("Segoe UI", 1, 18)); // NOI18N
         Titulo.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         Titulo.setText("Menu administrativo");
-
-        javax.swing.GroupLayout jPanel2Layout = new javax.swing.GroupLayout(jPanel2);
-        jPanel2.setLayout(jPanel2Layout);
-        jPanel2Layout.setHorizontalGroup(
-            jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(Titulo, javax.swing.GroupLayout.DEFAULT_SIZE, 410, Short.MAX_VALUE)
-        );
-        jPanel2Layout.setVerticalGroup(
-            jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel2Layout.createSequentialGroup()
-                .addGap(0, 0, Short.MAX_VALUE)
-                .addComponent(Titulo, javax.swing.GroupLayout.PREFERRED_SIZE, 60, javax.swing.GroupLayout.PREFERRED_SIZE))
-        );
+        jPanel2.add(Titulo, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 420, 60));
 
         jPanel1.add(jPanel2, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 410, 60));
 
@@ -158,6 +154,7 @@ public class MenuAdministracion extends javax.swing.JFrame {
     private javax.swing.JButton BVentas;
     private javax.swing.JLabel LabelImagen;
     private javax.swing.JLabel Titulo;
+    private javax.swing.JButton jButton2;
     private javax.swing.JPanel jPanel1;
     private javax.swing.JPanel jPanel2;
     // End of variables declaration//GEN-END:variables
