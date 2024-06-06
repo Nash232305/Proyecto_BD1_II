@@ -2,9 +2,8 @@ CREATE DATABASE MyPetCR
 
 USE MyPetCR
 
-
 CREATE TABLE TIPOS (
-	IdTipo int IDENTITY(1,1),
+	IdTipo int IDENTITY(1,1), 
 	Descripcion NVARCHAR(200)
 
 	CONSTRAINT pk_Tipos_IdTipo PRIMARY KEY (IdTipo)
@@ -20,6 +19,16 @@ CREATE TABLE USUARIOS (
 	CONSTRAINT pk_Usuarios_IdUsario PRIMARY KEY (IdUsuario),
 	CONSTRAINT fk_usuarios_tipos FOREIGN KEY (IdTipo) REFERENCES TIPOS(IdTipo)
 );
+
+
+
+CREATE TABLE RegistroInicioSesion (
+    IdRegistro int IDENTITY(1,1) PRIMARY KEY,
+    NombreUsuario NVARCHAR(300) NOT NULL,
+    TipoUsuario NVARCHAR(100) NOT NULL,
+    FechaHoraInicioSesion DATETIME NOT NULL DEFAULT GETDATE()
+);
+
 
 CREATE TABLE MASCOTAS (
 	IdMascota int IDENTITY(1,1),
@@ -91,4 +100,63 @@ CREATE TABLE DETALLECITAS (
 	CONSTRAINT fk_detallecitas_citas FOREIGN KEY (IdCita) REFERENCES CITAS(IdCita),
 	CONSTRAINT fk_detallecitas_opys FOREIGN KEY (IdPYS) REFERENCES OPYS(IdPYS)
 );
-	
+
+GO
+
+-- Creación del procedimiento almacenado para agregar un usuario
+CREATE PROCEDURE AgregarUsuario
+    @Nombre NVARCHAR(300),
+    @Correo NVARCHAR(150),
+    @Password NVARCHAR(15),
+    @IdTipo INT
+AS
+BEGIN
+    -- Insertar un nuevo usuario en la tabla USUARIOS
+    INSERT INTO USUARIOS (Nombre, Correo, Password, IdTipo)
+    VALUES (@Nombre, @Correo, @Password, @IdTipo);
+    
+    -- Opcional: Devolver el ID del usuario recién insertado
+    SELECT SCOPE_IDENTITY() AS IdUsuario;
+END
+GO
+
+SELECT * FROM TIPOS;
+SELECT * FROM USUARIOS;
+
+-- Llamar al procedimiento almacenado para agregar un nuevo usuario
+EXEC AgregarUsuario @Nombre = 'Juan Pérez', @Correo = 'juan.perez@example.com', @Password = 'password123', @IdTipo = 1;
+
+
+-- HACER UN STORE PROCEDURE QUE ME VALIDE SI EL USUARIO ES EXISTENTE
+GO
+CREATE PROCEDURE ValidarUsuarioExistente
+    @Nombre NVARCHAR(300),
+    @Password NVARCHAR(15),
+    @IdTipo INT
+AS
+BEGIN
+    SET NOCOUNT ON;
+
+    SELECT 1
+    FROM USUARIOS
+    WHERE Nombre = @Nombre AND Password = @Password AND IdTipo = @IdTipo;
+END
+GO
+
+CREATE PROCEDURE AgregarUsuarioInicioSesion
+    @NombreUsuario NVARCHAR(300),
+    @TipoUsuario NVARCHAR(100)
+AS
+BEGIN
+    -- Insertar un nuevo registro de inicio de sesión en la tabla RegistroInicioSesion
+    INSERT INTO RegistroInicioSesion (NombreUsuario, TipoUsuario)
+    VALUES (@NombreUsuario, @TipoUsuario);
+END;
+
+
+EXEC AgregarUsuarioInicioSesion @NombreUsuario = 'UsuarioEjemplo', @TipoUsuario = 'Cliente';
+
+
+SELECT * FROM USUARIOS;
+SELECT * FROM TIPOS;
+SELECT * FROM RegistroInicioSesion;

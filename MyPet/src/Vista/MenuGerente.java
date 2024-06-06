@@ -8,15 +8,14 @@ package Vista;
  *
  * @author henge
  */
-public class MenuAdministracion extends javax.swing.JFrame {
+public class MenuGerente extends javax.swing.JFrame {
 
-    
     /**
-     * Creates new form MenuAdministracion
+     * Creates new form MenuGerente
      */
-    public MenuAdministracion() {
+    public MenuGerente() {
         initComponents();
-        setLocationRelativeTo(null);  // Esta línea centra la ventana en la pantalla
+        setLocationRelativeTo(null);
     }
 
     /**
@@ -36,7 +35,7 @@ public class MenuAdministracion extends javax.swing.JFrame {
         jPanel2 = new javax.swing.JPanel();
         Volver = new javax.swing.JButton();
         Titulo = new javax.swing.JLabel();
-        GestionarUsuarios = new javax.swing.JButton();
+        GestionarUsuarios2 = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setResizable(false);
@@ -49,7 +48,7 @@ public class MenuAdministracion extends javax.swing.JFrame {
         AsignaciónCitas.setText("Asignaciones de citas");
         AsignaciónCitas.setBorder(new javax.swing.border.SoftBevelBorder(javax.swing.border.BevelBorder.RAISED));
         AsignaciónCitas.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
-        jPanel1.add(AsignaciónCitas, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 270, 210, -1));
+        jPanel1.add(AsignaciónCitas, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 260, 210, -1));
 
         AdminCitasUsuarios.setBackground(new java.awt.Color(51, 153, 255));
         AdminCitasUsuarios.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Imagenes/calendario (1).png"))); // NOI18N
@@ -61,18 +60,18 @@ public class MenuAdministracion extends javax.swing.JFrame {
                 AdminCitasUsuariosActionPerformed(evt);
             }
         });
-        jPanel1.add(AdminCitasUsuarios, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 180, 210, -1));
+        jPanel1.add(AdminCitasUsuarios, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 160, 210, -1));
 
         GestionarProductos.setBackground(new java.awt.Color(51, 153, 255));
         GestionarProductos.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Imagenes/medicina.png"))); // NOI18N
         GestionarProductos.setText("Gestionar productos");
         GestionarProductos.setBorder(new javax.swing.border.SoftBevelBorder(javax.swing.border.BevelBorder.RAISED));
         GestionarProductos.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
-        jPanel1.add(GestionarProductos, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 230, 210, -1));
+        jPanel1.add(GestionarProductos, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 210, 210, -1));
 
         LabelImagen.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         LabelImagen.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Imagenes/logo (1).png"))); // NOI18N
-        jPanel1.add(LabelImagen, new org.netbeans.lib.awtextra.AbsoluteConstraints(270, 110, 200, 170));
+        jPanel1.add(LabelImagen, new org.netbeans.lib.awtextra.AbsoluteConstraints(250, 100, 200, 170));
 
         jPanel2.setBackground(new java.awt.Color(153, 255, 255));
         jPanel2.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
@@ -80,7 +79,6 @@ public class MenuAdministracion extends javax.swing.JFrame {
         Volver.setBackground(new java.awt.Color(153, 255, 255));
         Volver.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Imagenes/flecha-izquierda.png"))); // NOI18N
         Volver.setBorder(null);
-        Volver.setBorderPainted(false);
         Volver.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
         Volver.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -91,22 +89,22 @@ public class MenuAdministracion extends javax.swing.JFrame {
 
         Titulo.setFont(new java.awt.Font("Segoe UI", 1, 18)); // NOI18N
         Titulo.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
-        Titulo.setText("Menu administrativo");
+        Titulo.setText("Menu Gerente");
         jPanel2.add(Titulo, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 470, 60));
 
         jPanel1.add(jPanel2, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 410, 60));
 
-        GestionarUsuarios.setBackground(new java.awt.Color(51, 153, 255));
-        GestionarUsuarios.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Imagenes/expediente.png"))); // NOI18N
-        GestionarUsuarios.setText("Gestionar usuarios");
-        GestionarUsuarios.setBorder(new javax.swing.border.SoftBevelBorder(javax.swing.border.BevelBorder.RAISED));
-        GestionarUsuarios.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
-        GestionarUsuarios.addActionListener(new java.awt.event.ActionListener() {
+        GestionarUsuarios2.setBackground(new java.awt.Color(51, 153, 255));
+        GestionarUsuarios2.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Imagenes/expediente.png"))); // NOI18N
+        GestionarUsuarios2.setText("Gestionar usuarios");
+        GestionarUsuarios2.setBorder(new javax.swing.border.SoftBevelBorder(javax.swing.border.BevelBorder.RAISED));
+        GestionarUsuarios2.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
+        GestionarUsuarios2.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                GestionarUsuariosActionPerformed(evt);
+                GestionarUsuarios2ActionPerformed(evt);
             }
         });
-        jPanel1.add(GestionarUsuarios, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 130, 210, -1));
+        jPanel1.add(GestionarUsuarios2, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 110, 210, -1));
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
@@ -116,7 +114,7 @@ public class MenuAdministracion extends javax.swing.JFrame {
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(jPanel1, javax.swing.GroupLayout.DEFAULT_SIZE, 315, Short.MAX_VALUE)
+            .addComponent(jPanel1, javax.swing.GroupLayout.DEFAULT_SIZE, 300, Short.MAX_VALUE)
         );
 
         pack();
@@ -127,20 +125,19 @@ public class MenuAdministracion extends javax.swing.JFrame {
     }//GEN-LAST:event_AdminCitasUsuariosActionPerformed
 
     private void VolverActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_VolverActionPerformed
-        // Cuando se presiona el botón de volver, se cierra la ventana actual y se abre la ventana de login
+        // TODO add your handling code here:
         Login login = new Login();
         login.setVisible(true);
         this.dispose();
-        
     }//GEN-LAST:event_VolverActionPerformed
 
-    private void GestionarUsuariosActionPerformed(java.awt.event.ActionEvent evt) {                                                  
-        // Se crea una instancia de la ventana de gestión de usuarios y se muestra en pantalla
-        GestionarUsuariosA gestionUsuarios = new GestionarUsuariosA();
-        gestionUsuarios.setVisible(true);
-        this.dispose();
+    private void GestionarUsuarios2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_GestionarUsuarios2ActionPerformed
+        // TODO add your handling code here:
 
-    }
+        GestionarUsuariosG gestionarUsuarios = new GestionarUsuariosG();
+        gestionarUsuarios.setVisible(true);
+        this.dispose();
+    }//GEN-LAST:event_GestionarUsuarios2ActionPerformed
 
     /**
      * @param args the command line arguments
@@ -159,20 +156,20 @@ public class MenuAdministracion extends javax.swing.JFrame {
                 }
             }
         } catch (ClassNotFoundException ex) {
-            java.util.logging.Logger.getLogger(MenuAdministracion.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(MenuGerente.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         } catch (InstantiationException ex) {
-            java.util.logging.Logger.getLogger(MenuAdministracion.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(MenuGerente.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         } catch (IllegalAccessException ex) {
-            java.util.logging.Logger.getLogger(MenuAdministracion.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(MenuGerente.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         } catch (javax.swing.UnsupportedLookAndFeelException ex) {
-            java.util.logging.Logger.getLogger(MenuAdministracion.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(MenuGerente.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         }
         //</editor-fold>
 
         /* Create and display the form */
         java.awt.EventQueue.invokeLater(new Runnable() {
             public void run() {
-                new MenuAdministracion().setVisible(true);
+                new MenuGerente().setVisible(true);
             }
         });
     }
@@ -181,7 +178,7 @@ public class MenuAdministracion extends javax.swing.JFrame {
     private javax.swing.JButton AdminCitasUsuarios;
     private javax.swing.JButton AsignaciónCitas;
     private javax.swing.JButton GestionarProductos;
-    private javax.swing.JButton GestionarUsuarios;
+    private javax.swing.JButton GestionarUsuarios2;
     private javax.swing.JLabel LabelImagen;
     private javax.swing.JLabel Titulo;
     private javax.swing.JButton Volver;

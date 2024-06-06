@@ -9,6 +9,7 @@ public class MenuCliente extends javax.swing.JFrame {
     /** Creates new form Menu */
     public MenuCliente() {
         initComponents();
+        setLocationRelativeTo(null);  // Esta línea centra la ventana en la pantalla
     }
 
     /** This method is called from within the constructor to
@@ -24,10 +25,11 @@ public class MenuCliente extends javax.swing.JFrame {
         jPanel1 = new javax.swing.JPanel();
         TituloLabel = new javax.swing.JLabel();
         Imagen = new javax.swing.JLabel();
-        PCita = new javax.swing.JButton();
-        CExpediente = new javax.swing.JButton();
-        CCita = new javax.swing.JButton();
-        jButton3 = new javax.swing.JButton();
+        CitaRevisión = new javax.swing.JButton();
+        HistorialCompras = new javax.swing.JButton();
+        CompraProductos = new javax.swing.JButton();
+        Volver = new javax.swing.JButton();
+        SolicitarCita = new javax.swing.JButton();
 
         jButton2.setBackground(new java.awt.Color(153, 255, 255));
         jButton2.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Imagenes/flecha-izquierda.png"))); // NOI18N
@@ -35,6 +37,7 @@ public class MenuCliente extends javax.swing.JFrame {
         jButton2.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
+        setResizable(false);
 
         jPanel1.setBackground(new java.awt.Color(153, 255, 255));
         jPanel1.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
@@ -48,39 +51,56 @@ public class MenuCliente extends javax.swing.JFrame {
         Imagen.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Imagenes/logo (1).png"))); // NOI18N
         Imagen.setMaximumSize(new java.awt.Dimension(51, 514));
         Imagen.setPreferredSize(new java.awt.Dimension(514, 54));
-        jPanel1.add(Imagen, new org.netbeans.lib.awtextra.AbsoluteConstraints(300, 110, 180, 170));
+        jPanel1.add(Imagen, new org.netbeans.lib.awtextra.AbsoluteConstraints(280, 90, 180, 170));
 
-        PCita.setBackground(new java.awt.Color(153, 255, 255));
-        PCita.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Imagenes/cita.png"))); // NOI18N
-        PCita.setText("Programar citas");
-        PCita.setBorder(new javax.swing.border.SoftBevelBorder(javax.swing.border.BevelBorder.RAISED));
-        PCita.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
-        PCita.addActionListener(new java.awt.event.ActionListener() {
+        CitaRevisión.setBackground(new java.awt.Color(51, 153, 255));
+        CitaRevisión.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Imagenes/cita.png"))); // NOI18N
+        CitaRevisión.setText("Solicitar cita de revisión");
+        CitaRevisión.setBorder(new javax.swing.border.SoftBevelBorder(javax.swing.border.BevelBorder.RAISED));
+        CitaRevisión.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
+        CitaRevisión.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                PCitaActionPerformed(evt);
+                CitaRevisiónActionPerformed(evt);
             }
         });
-        jPanel1.add(PCita, new org.netbeans.lib.awtextra.AbsoluteConstraints(50, 130, 140, -1));
+        jPanel1.add(CitaRevisión, new org.netbeans.lib.awtextra.AbsoluteConstraints(50, 140, 170, -1));
 
-        CExpediente.setBackground(new java.awt.Color(153, 255, 255));
-        CExpediente.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Imagenes/expediente.png"))); // NOI18N
-        CExpediente.setText("Consultar Expediente");
-        CExpediente.setBorder(new javax.swing.border.SoftBevelBorder(javax.swing.border.BevelBorder.RAISED));
-        CExpediente.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
-        jPanel1.add(CExpediente, new org.netbeans.lib.awtextra.AbsoluteConstraints(50, 180, 140, -1));
+        HistorialCompras.setBackground(new java.awt.Color(51, 153, 255));
+        HistorialCompras.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Imagenes/expediente.png"))); // NOI18N
+        HistorialCompras.setText("Historial de compras");
+        HistorialCompras.setBorder(new javax.swing.border.SoftBevelBorder(javax.swing.border.BevelBorder.RAISED));
+        HistorialCompras.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
+        jPanel1.add(HistorialCompras, new org.netbeans.lib.awtextra.AbsoluteConstraints(50, 180, 170, -1));
 
-        CCita.setBackground(new java.awt.Color(153, 255, 255));
-        CCita.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Imagenes/consulta.png"))); // NOI18N
-        CCita.setText("Consultar Cita");
-        CCita.setBorder(new javax.swing.border.SoftBevelBorder(javax.swing.border.BevelBorder.RAISED));
-        CCita.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
-        jPanel1.add(CCita, new org.netbeans.lib.awtextra.AbsoluteConstraints(50, 240, 140, -1));
+        CompraProductos.setBackground(new java.awt.Color(51, 153, 255));
+        CompraProductos.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Imagenes/consulta.png"))); // NOI18N
+        CompraProductos.setText("Comprar productos");
+        CompraProductos.setBorder(new javax.swing.border.SoftBevelBorder(javax.swing.border.BevelBorder.RAISED));
+        CompraProductos.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
+        jPanel1.add(CompraProductos, new org.netbeans.lib.awtextra.AbsoluteConstraints(50, 220, 170, -1));
 
-        jButton3.setBackground(new java.awt.Color(153, 255, 255));
-        jButton3.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Imagenes/flecha-izquierda.png"))); // NOI18N
-        jButton3.setBorder(null);
-        jButton3.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
-        jPanel1.add(jButton3, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 70, 60));
+        Volver.setBackground(new java.awt.Color(153, 255, 255));
+        Volver.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Imagenes/flecha-izquierda.png"))); // NOI18N
+        Volver.setBorder(null);
+        Volver.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
+        Volver.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                VolverActionPerformed(evt);
+            }
+        });
+        jPanel1.add(Volver, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 70, 60));
+
+        SolicitarCita.setBackground(new java.awt.Color(51, 153, 255));
+        SolicitarCita.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Imagenes/cita.png"))); // NOI18N
+        SolicitarCita.setText("Solicitar Cita");
+        SolicitarCita.setBorder(new javax.swing.border.SoftBevelBorder(javax.swing.border.BevelBorder.RAISED));
+        SolicitarCita.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
+        SolicitarCita.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                SolicitarCitaActionPerformed(evt);
+            }
+        });
+        jPanel1.add(SolicitarCita, new org.netbeans.lib.awtextra.AbsoluteConstraints(50, 100, 170, -1));
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
@@ -96,9 +116,20 @@ public class MenuCliente extends javax.swing.JFrame {
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
-    private void PCitaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_PCitaActionPerformed
+    private void CitaRevisiónActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_CitaRevisiónActionPerformed
         // TODO add your handling code here:
-    }//GEN-LAST:event_PCitaActionPerformed
+    }//GEN-LAST:event_CitaRevisiónActionPerformed
+
+    private void SolicitarCitaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_SolicitarCitaActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_SolicitarCitaActionPerformed
+
+    private void VolverActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_VolverActionPerformed
+        // TODO add your handling code here:
+        Login login = new Login();
+        login.setVisible(true);
+        this.dispose();
+    }//GEN-LAST:event_VolverActionPerformed
 
     /**
      * @param args the command line arguments
@@ -137,13 +168,14 @@ public class MenuCliente extends javax.swing.JFrame {
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private javax.swing.JButton CCita;
-    private javax.swing.JButton CExpediente;
+    private javax.swing.JButton CitaRevisión;
+    private javax.swing.JButton CompraProductos;
+    private javax.swing.JButton HistorialCompras;
     private javax.swing.JLabel Imagen;
-    private javax.swing.JButton PCita;
+    private javax.swing.JButton SolicitarCita;
     private javax.swing.JLabel TituloLabel;
+    private javax.swing.JButton Volver;
     private javax.swing.JButton jButton2;
-    private javax.swing.JButton jButton3;
     private javax.swing.JPanel jPanel1;
     // End of variables declaration//GEN-END:variables
 
