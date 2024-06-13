@@ -64,112 +64,138 @@ public class RegistroUsuario1 {
         this.idTipo = idTipo;
     }
 
-    public static boolean agregarUsuarioA(String nombre, String correo, String password, int idTipo) {
-        //si es administrador solo puede registrar clientes y veterinarios 
-        if (idTipo == 1 || idTipo == 2) {
-            Connection connection = null;
-            PreparedStatement statement = null;
+    public static boolean agregarUsuario(String nombre, String correo, String password, int idTipo) {
 
-            //validar que no estén vacíos
-            if (nombre.isEmpty() || correo.isEmpty() || password.isEmpty()) {
-                JOptionPane.showMessageDialog(null, "Por favor, llene todos los campos.");
-                return false;
-            }
-            //validar que el tipo de usuario no esté vacío
-            if (idTipo == 0) {
-                JOptionPane.showMessageDialog(null, "Por favor, seleccione un tipo de usuario.");
-                return false;
-            }
-
-            try {
-                connection = SQLConnection.getConnection();
-                statement = connection.prepareStatement("INSERT INTO USUARIOS (Nombre, Correo, Password, IdTipo) VALUES (?, ?, ?, ?)");
-                statement.setString(1, nombre);
-                statement.setString(2, correo);
-                statement.setString(3, password);
-                statement.setInt(4, idTipo);
-
-                statement.executeUpdate();
-                JOptionPane.showMessageDialog(null, "Usuario registrado correctamente.");
-                return true;
-            } catch (SQLException ex) {
-                System.err.println("Error al registrar usuario:");
-                ex.printStackTrace();
-                return false;
-            } finally {
-                try {
-                    if (statement != null) {
-                        statement.close();
-                    }
-                    if (connection != null) {
-                        connection.close();
-                    }
-                } catch (SQLException ex) {
-                    System.err.println("Error al cerrar conexión:");
-                    ex.printStackTrace();
-                }
-            }
-        } else {
-            JOptionPane.showMessageDialog(null, "No tiene permisos para registrar este tipo de usuario.");
+        // Validación de entradas (más detallada)
+        if (nombre == null || nombre.trim().isEmpty() || 
+            correo == null || correo.trim().isEmpty() ||
+            password == null || password.trim().isEmpty()) {
+            JOptionPane.showMessageDialog(null, "Por favor, complete todos los campos.");
             return false;
         }
+
+        if (!isValidEmail(correo)) { // Validación básica de correo electrónico
+            JOptionPane.showMessageDialog(null, "Por favor, ingrese un correo electrónico válido.");
+            return false;
+        }
+
+        if (idTipo <= 0) { 
+            JOptionPane.showMessageDialog(null, "Por favor, seleccione un tipo de usuario válido.");
+            return false;
+        }
+
+        // Encriptar contraseña (importante para la seguridad)
+        String passwordEncriptado = encriptarPassword(password); // Método que debes implementar
+
+        Connection connection = SQLConnection.getConnection();
+        PreparedStatement statement = null;
+
+        try {
+            connection = SQLConnection.getConnection(); // Obtener conexión a la base de datos
+            String sql = "{CALL AgregarUsuario(?, ?, ?, ?)}";
+            statement = connection.prepareStatement(sql);
+            statement.setString(1, nombre);
+            statement.setString(2, correo);
+            statement.setString(3, passwordEncriptado);
+            statement.setInt(4, idTipo);
+            statement.executeUpdate();
+
+            JOptionPane.showMessageDialog(null, "Usuario registrado correctamente.");
+            return true;
+
+        } catch (SQLException ex) {
+            JOptionPane.showMessageDialog(null, "Error al registrar usuario: " + ex.getMessage());
+            // Registrar el error en un archivo de registro o sistema de logging
+            return false;
+
+        } finally {
+            try {
+                if (statement != null) {
+                    statement.close();
+                }
+                if (connection != null) {
+                    connection.close();
+                }
+            } catch (SQLException ex) {
+                System.err.println("Error al cerrar conexión:");
+                ex.printStackTrace();
+            }
+        }
+    }
+
+    // Método para validar el formato de correo electrónico (implementación básica)
+    private static boolean isValidEmail(String email) {
+        return email.matches("^[A-Za-z0-9+_.-]+@[A-Za-z0-9.-]+$");
+    }
+
+    // Método para encriptar la contraseña (debes implementar esto)
+    private static String encriptarPassword(String password) {
+        // ... (Implementa un algoritmo seguro de encriptación, como bcrypt o Argon2)
+        return password;
+
+
     }
 
     public static boolean agregarUsuarioG(String nombre, String correo, String password, int idTipo) {
-        //si es gerente PUEDE registrar cualquier tipo de usuario
-        if (idTipo == 1 || idTipo == 2 || idTipo == 3 || idTipo == 4) {
-            Connection connection = null;
-            PreparedStatement statement = null;
 
-            //validar que no estén vacíos
-            if (nombre.isEmpty() || correo.isEmpty() || password.isEmpty()) {
-                JOptionPane.showMessageDialog(null, "Por favor, llene todos los campos.");
-                return false;
-            }
-            //validar que el tipo de usuario no esté vacío
-            if (idTipo == 0) {
-                JOptionPane.showMessageDialog(null, "Por favor, seleccione un tipo de usuario.");
-                return false;
-            }
-
-            try {
-                connection = SQLConnection.getConnection();
-                statement = connection.prepareStatement("INSERT INTO USUARIOS (Nombre, Correo, Password, IdTipo) VALUES (?, ?, ?, ?)");
-                statement.setString(1, nombre);
-                statement.setString(2, correo);
-                statement.setString(3, password);
-                statement.setInt(4, idTipo);
-
-                statement.executeUpdate();
-                JOptionPane.showMessageDialog(null, "Usuario registrado correctamente.");
-                return true;
-            } catch (SQLException ex) {
-                System.err.println("Error al registrar usuario:");
-                ex.printStackTrace();
-                return false;
-            } finally {
-                try {
-                    if (statement != null) {
-                        statement.close();
-                    }
-                    if (connection != null) {
-                        connection.close();
-                    }
-                } catch (SQLException ex) {
-                    System.err.println("Error al cerrar conexión:");
-                    ex.printStackTrace();
-                }
-            }
-        } else {
-            JOptionPane.showMessageDialog(null, "No tiene permisos para registrar este tipo de usuario.");
+        // Validación más completa de las entradas
+        if (nombre == null || nombre.trim().isEmpty() || 
+            correo == null || correo.trim().isEmpty() ||
+            password == null || password.trim().isEmpty()) {
+            JOptionPane.showMessageDialog(null, "Por favor, complete todos los campos.");
             return false;
         }
+
+        if (!isValidEmail(correo)) {
+            JOptionPane.showMessageDialog(null, "Por favor, ingrese un correo electrónico válido.");
+            return false;
+        }
+
+        if (idTipo <= 0) { 
+            JOptionPane.showMessageDialog(null, "Por favor, seleccione un tipo de usuario válido.");
+            return false;
+        }
+
+        // Encriptación de la contraseña
+        String passwordEncriptado = encriptarPassword(password);
+
+        Connection connection = null;
+        PreparedStatement statement = null;
+
+        try {
+            connection = SQLConnection.getConnection(); // Obtener conexión a la base de datos y llamar al StoreProcedure
+            String sql = "{CALL AgregarUsuario(?, ?, ?, ?)}";
+            statement = connection.prepareStatement(sql);
+            statement.setString(1, nombre);
+            statement.setString(2, correo);
+            statement.setString(3, passwordEncriptado); 
+            statement.setInt(4, idTipo);
+            statement.executeUpdate();
+
+            JOptionPane.showMessageDialog(null, "Usuario" + nombre + " registrado correctamente.");
+            return true;
+
+        } catch (SQLException ex) {
+            JOptionPane.showMessageDialog(null, "Error al registrar usuario: " + ex.getMessage());
+            // Considera registrar el error en un log o archivo de texto para depuración
+            return false;
+
+        } finally {
+            // Bloque try-with-resources para cerrar recursos de manera segura
+            try {
+                if (statement != null) {
+                    statement.close();
+                }
+                if (connection != null) {
+                    connection.close();
+                }
+            } catch (SQLException ex) {
+                System.err.println("Error al cerrar conexión:");
+                ex.printStackTrace();
+            }
+        }
     }
+}
+        
     
 
-   
-
-
-
-
-}

@@ -6,8 +6,10 @@ CREATE TABLE TIPOS (
 	IdTipo int IDENTITY(1,1), 
 	Descripcion NVARCHAR(200)
 
+
 	CONSTRAINT pk_Tipos_IdTipo PRIMARY KEY (IdTipo)
 );
+
 
 CREATE TABLE USUARIOS (
 	IdUsuario int IDENTITY(1,1),
@@ -20,6 +22,7 @@ CREATE TABLE USUARIOS (
 	CONSTRAINT fk_usuarios_tipos FOREIGN KEY (IdTipo) REFERENCES TIPOS(IdTipo)
 );
 
+Select * from USUARIOS;
 
 
 CREATE TABLE RegistroInicioSesion (
@@ -153,6 +156,49 @@ BEGIN
     VALUES (@NombreUsuario, @TipoUsuario);
 END;
 
+GO
+CREATE PROCEDURE CrearCarrito
+AS
+BEGIN
+    IF OBJECT_ID('MyPetCR..#Carrito') IS NULL
+    BEGIN
+        CREATE TABLE #Carrito
+        (
+            IdPYS INT,
+            Cantidad DECIMAL(10, 2),
+            Total DECIMAL(10, 2)
+        )
+    END
+END
+GO
+
+CREATE PROCEDURE AgregarACarrito
+    @IdPYS INT,
+    @Cantidad DECIMAL(10, 2)
+AS
+BEGIN
+    EXEC CrearCarrito
+
+    DECLARE @Total INT
+    DECLARE @Precio Decimal(16,6)
+
+    SET @Precio = (SELECT OPYS.Precio FROM OPYS WHERE OPYS.IdPYS = @IdPYS)
+    SET @TOTAL = @Precio * @Cantidad
+
+    INSERT INTO #Carrito (IdPYS, Cantidad, Total)
+    VALUES (@IdPYS, @Cantidad, @Total)
+END
+
+GO
+CREATE PROCEDURE EliminarCarrito
+AS
+BEGIN
+    IF OBJECT_ID('MyPetCR..#Carrito') IS NOT NULL
+    BEGIN
+        DROP TABLE #Carrito
+    END
+END
+GO
 
 EXEC AgregarUsuarioInicioSesion @NombreUsuario = 'UsuarioEjemplo', @TipoUsuario = 'Cliente';
 

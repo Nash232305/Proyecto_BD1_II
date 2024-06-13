@@ -76,12 +76,13 @@ public class Logins {
                 // Abrir la ventana correspondiente según el tipo de usuario
                 switch (tipoUsuario) {
                     case 1:
-                        MenuCliente menuCliente = new MenuCliente();
-                        menuCliente.setVisible(true);
-                        break;
-                    case 2:
                         MenuVeterinario menuVeterinario = new MenuVeterinario();
                         menuVeterinario.setVisible(true);
+                        break;
+                    case 2:
+                        MenuCliente menuCliente = new MenuCliente();
+                        menuCliente.setVisible(true);
+                        
                         break;
                     case 3:
                         MenuGerente menuGerente = new MenuGerente();
@@ -125,15 +126,17 @@ public class Logins {
     private static String obtenerNombreTipoUsuario(int tipoUsuario) {
         switch (tipoUsuario) {
             case 1:
-                return "Cliente";
-            case 2:
                 return "Veterinario";
+            case 2:
+                return "Cliente";
             case 3:
                 return "Gerente";
             case 4:
                 return "Administrador";
             default:
                 return "";
+
+               
         }
     }
 }    
