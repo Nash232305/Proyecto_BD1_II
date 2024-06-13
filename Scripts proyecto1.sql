@@ -1,4 +1,4 @@
-CREATE DATABASE MyPetCR
+cREATE DATABASE MyPetCR
 
 USE MyPetCR
 
@@ -106,103 +106,277 @@ CREATE TABLE DETALLECITAS (
 
 GO
 
--- Creación del procedimiento almacenado para agregar un usuario
-CREATE PROCEDURE AgregarUsuario
-    @Nombre NVARCHAR(300),
+create PROCEDURE LoginUsuario
     @Correo NVARCHAR(150),
-    @Password NVARCHAR(15),
-    @IdTipo INT
+    @Password NVARCHAR(15)
 AS
 BEGIN
-    -- Insertar un nuevo usuario en la tabla USUARIOS
-    INSERT INTO USUARIOS (Nombre, Correo, Password, IdTipo)
-    VALUES (@Nombre, @Correo, @Password, @IdTipo);
+	SET NOCOUNT ON;
+
+    IF EXISTS (SELECT 1 FROM USUARIOS WHERE Correo = @Correo AND Password = @Password)
+    BEGIN
+        DECLARE @IdUsuario INT = (SELECT IdUsuario FROM USUARIOS WHERE Correo = @Correo AND Password = @Password)
+
+        EXEC AuditLogger @IdUsuario, 5;
+
+        SELECT IdUsuario, idTipo,  Nombre FROM USUARIOS WHERE Correo = @Correo AND Password = @Password;
+    END
     
-    -- Opcional: Devolver el ID del usuario recién insertado
-    SELECT SCOPE_IDENTITY() AS IdUsuario;
 END
 GO
 
-SELECT * FROM TIPOS;
-SELECT * FROM USUARIOS;
-
--- Llamar al procedimiento almacenado para agregar un nuevo usuario
-EXEC AgregarUsuario @Nombre = 'Juan Pérez', @Correo = 'juan.perez@example.com', @Password = 'password123', @IdTipo = 1;
-
-
--- HACER UN STORE PROCEDURE QUE ME VALIDE SI EL USUARIO ES EXISTENTE
-GO
-CREATE PROCEDURE ValidarUsuarioExistente
-    @Nombre NVARCHAR(300),
-    @Password NVARCHAR(15),
-    @IdTipo INT
+create procedure AuditLogger
+	@NombreUsuario int,
+	@tipoActividad int
 AS
-BEGIN
-    SET NOCOUNT ON;
+BEGIN	
+	begin tran
+	begin try 
 
-    SELECT 1
-    FROM USUARIOS
-    WHERE Nombre = @Nombre AND Password = @Password AND IdTipo = @IdTipo;
-END
-GO
+		INSERT INTO AUDIT_LOG(idUsuario, idTipo, FechaHora)
+		VALUES (@NombreUsuario, @tipoActividad,GETDATE());
 
-CREATE PROCEDURE AgregarUsuarioInicioSesion
-    @NombreUsuario NVARCHAR(300),
-    @TipoUsuario NVARCHAR(100)
-AS
-BEGIN
-    -- Insertar un nuevo registro de inicio de sesión en la tabla RegistroInicioSesion
-    INSERT INTO RegistroInicioSesion (NombreUsuario, TipoUsuario)
-    VALUES (@NombreUsuario, @TipoUsuario);
+	end try 
+	begin catch
+		rollback tran
+
+	end catch
 END;
-
-GO
-CREATE PROCEDURE CrearCarrito
-AS
-BEGIN
-    IF OBJECT_ID('MyPetCR..#Carrito') IS NULL
-    BEGIN
-        CREATE TABLE #Carrito
-        (
-            IdPYS INT,
-            Cantidad DECIMAL(10, 2),
-            Total DECIMAL(10, 2)
-        )
-    END
-END
 GO
 
-CREATE PROCEDURE AgregarACarrito
-    @IdPYS INT,
-    @Cantidad DECIMAL(10, 2)
-AS
-BEGIN
-    EXEC CrearCarrito
+CREATE PROCEDURE getInventario
+as
+begin
+	Select IdPYS Cod,Descripcion,Precio,Stock From OPYS Order by IdPYS asc
 
-    DECLARE @Total INT
-    DECLARE @Precio Decimal(16,6)
-
-    SET @Precio = (SELECT OPYS.Precio FROM OPYS WHERE OPYS.IdPYS = @IdPYS)
-    SET @TOTAL = @Precio * @Cantidad
-
-    INSERT INTO #Carrito (IdPYS, Cantidad, Total)
-    VALUES (@IdPYS, @Cantidad, @Total)
-END
+end;
 
 GO
-CREATE PROCEDURE EliminarCarrito
-AS
-BEGIN
-    IF OBJECT_ID('MyPetCR..#Carrito') IS NOT NULL
-    BEGIN
-        DROP TABLE #Carrito
-    END
-END
-GO
 
-EXEC AgregarUsuarioInicioSesion @NombreUsuario = 'UsuarioEjemplo', @TipoUsuario = 'Cliente';
+CREATE PROCEDURE buscarArticulo
+	@filtro nvarchar(100)
+as 
+begin
+	SELECT IdPYS Cod,Descripcion,Precio,Stock
+	FROM OPYS
+	WHERE descripcion LIKE '%' + @filtro + '%' or CONVERT(NVARCHAR(50),IdPYS) LIKE '%' + @filtro + '%'
+	ORDER BY IdPYS ASC
+end;
+go
+
+create procedure getReseña
+	@IdPYS int
+as 
+begin
+	Select IdResenna,Resenna,Calificacion from RESENNAS Where IdPYS = @idPYS order by IdResenna asc
+end
+
+create procedure agregarReseña
+	@Nombre nvarchar(200),
+	@Resena nvarchar(300),
+	@calificacion decimal(5,2)
+as
+begin
+	begin tran
+	begin try 
+		declare @IdPYS nvarchar(200) = (select IdPYS from OPYS WHERE Descripcion = @Nombre)
+		insert into RESENNAS (IdPYS,Resenna,Calificacion)
+		values(@IdPYS,@Resena,@calificacion)
+		commit tran
+
+	end try 
+	begin catch
+		rollback tran
+
+	end catch
+	
+end
+select * From OPYS
+SELECT * FROM RESENNAS
+exec agregarReseña 'Peine Antipulgas','Esta buenisimo', 1.5
 
 
-SELECT * FROM USUARIOS;
-SELECT * FROM TIPOS;
-SELECT * FROM RegistroInicioSesion;
+create procedure getNombreArticulo
+	@IdPYS int
+as
+begin
+	select Descripcion from OPYS WHERE @IdPYS = IdPYS
+
+end
+
+create procedure getPrecioPorCod
+	@cod int
+as 
+begin
+	select precio From OPYS Where IdPYS = @cod
+end
+
+CREATE procedure getDescripcionPorCod
+	@cod int
+
+as 
+begin
+	select descripcion From OPYS Where IdPYS = @cod
+end
+
+
+
+CREATE TABLE PEDIDO(
+	id int primary key IDENTITY(1,1) ,
+	nombre nvarchar(100),
+	monto decimal(21,6),
+	direccionEntrega nvarchar(500)
+)
+
+
+CREATE TABLE dbo.DETALLE_PEDIDO(
+	idDetalle int primary key IDENTITY(1,1),
+	idPedido int foreign key references PEDIDO(id) ,
+	producto int ,
+	cantidad int 
+)
+
+create procedure agregarPedido
+	@nombre nvarchar(100),
+	@direccion nvarchar(500)
+as 
+begin
+
+	begin tran 
+	begin try 
+		Insert into PEDIDO (nombre,direccionEntrega)
+		values ( @nombre,@direccion)
+		commit tran
+	end try 
+
+	begin catch 
+		rollback tran
+	end catch
+	
+end
+
+
+create procedure getUltimoPedido
+as
+begin
+	select top 1 id 
+	from PEDIDO
+	order by id desc
+end
+
+
+create procedure agregarDetallePedido
+	@idPedido int,
+	@producto int,
+	@cant int
+as 
+begin
+	begin tran 
+	begin try 
+		Insert into DETALLE_PEDIDO (idPedido,producto,cantidad)
+		values (@idPedido,@producto,@cant)
+		Update OPYS
+		SET Stock = Stock - @cant
+		Where @producto = IdPYS
+		commit tran
+	end try 
+	begin catch 
+		rollback tran
+	end catch
+end
+
+
+create procedure actualizarEncabezado
+	@idPedido int
+as
+begin
+	begin tran
+	begin try
+		declare @total int = (Select sum(D.Cantidad*i.Precio) from DETALLE_PEDIDO D inner join OPYS I ON i.IdPYS = d.Producto Where idPedido = @idPedido Group by idPedido)
+		update PEDIDO
+		set Monto = @total + 4500
+		where id = @idPedido
+		commit tran
+	end try
+
+	begin catch
+		rollback tran
+	end catch
+end
+go
+
+
+create procedure getClientes
+
+as 
+begin
+	Select IdUsuario,Nombre ,Correo
+	from USUARIOS
+	Where IdTipo = 2
+	Order by IdUsuario asc
+end 
+
+CREATE PROCEDURE agregarUsuario
+	@Nombre nvarchar(300),
+	@Correo nvarchar(150),
+	@Password nvarchar(15)
+as 
+begin
+	begin tran
+	begin try 
+		Insert into USUARIOS (Nombre,Correo,Password,IdTipo)
+		values( @Nombre ,@Correo ,@Password ,2)
+
+		commit tran
+	end try
+
+	begin catch
+		rollback
+	end catch
+end
+
+create procedure getNombreClientePorCod
+	@IdUsuario int
+as
+begin
+	Select Nombre from USUARIOS where IdUsuario = @IdUsuario
+end
+
+create procedure getCorreoClientePorCod
+	@IdUsuario int
+as
+begin
+	Select Correo from USUARIOS where IdUsuario = @IdUsuario
+end;
+go
+
+create procedure getPassClientePorCod
+	@IdUsuario int
+as
+begin
+	Select Password from USUARIOS where IdUsuario = @IdUsuario
+end;
+go
+
+create procedure actualizarUsuario
+	@IdUsuario int,
+	@Nombre nvarchar(300),
+	@Correo nvarchar(150),
+	@Pass nvarchar(15)
+as 
+begin
+	begin tran
+	begin try
+		Update USUARIOS
+		SET Nombre = @Nombre,
+			Correo = @Correo,
+			Password = @Pass
+		Where IdUsuario = @IdUsuario
+		commit tran
+
+	end try
+	begin catch
+		rollback tran
+	end catch 
+end;
+go

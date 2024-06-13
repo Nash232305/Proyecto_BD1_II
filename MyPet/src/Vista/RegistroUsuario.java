@@ -1,5 +1,5 @@
 package Vista;
-import Modelo.RegistroUsuario1;
+import Modelo.*;
 /**
  *
  * @author henge
@@ -36,7 +36,7 @@ public class RegistroUsuario extends javax.swing.JFrame {
         BotonVolver = new javax.swing.JButton();
         LabelImagen = new javax.swing.JLabel();
         jLabel5 = new javax.swing.JLabel();
-        InputContraseña = new javax.swing.JPasswordField();
+        InputContraseña1 = new javax.swing.JTextField();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setLocationByPlatform(true);
@@ -59,7 +59,7 @@ public class RegistroUsuario extends javax.swing.JFrame {
         jPanel1.add(LabelingreseNombre, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 70, 100, 30));
 
         LabelCorreoElectronico.setText("Ingrese correo electrónico");
-        jPanel1.add(LabelCorreoElectronico, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 180, 190, 30));
+        jPanel1.add(LabelCorreoElectronico, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 180, 150, 30));
 
         InputCorreo.setHorizontalAlignment(javax.swing.JTextField.CENTER);
         InputCorreo.addActionListener(new java.awt.event.ActionListener() {
@@ -67,7 +67,7 @@ public class RegistroUsuario extends javax.swing.JFrame {
                 InputCorreoActionPerformed(evt);
             }
         });
-        jPanel1.add(InputCorreo, new org.netbeans.lib.awtextra.AbsoluteConstraints(180, 180, 150, 30));
+        jPanel1.add(InputCorreo, new org.netbeans.lib.awtextra.AbsoluteConstraints(170, 180, 150, 30));
 
         InputNombre.setHorizontalAlignment(javax.swing.JTextField.CENTER);
         InputNombre.addActionListener(new java.awt.event.ActionListener() {
@@ -112,18 +112,18 @@ public class RegistroUsuario extends javax.swing.JFrame {
 
         LabelImagen.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         LabelImagen.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Imagenes/logo (1).png"))); // NOI18N
-        jPanel1.add(LabelImagen, new org.netbeans.lib.awtextra.AbsoluteConstraints(370, 50, 250, 270));
+        jPanel1.add(LabelImagen, new org.netbeans.lib.awtextra.AbsoluteConstraints(350, 60, 250, 270));
 
         jLabel5.setText("Ingrese contraseña");
-        jPanel1.add(jLabel5, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 130, 130, 30));
+        jPanel1.add(jLabel5, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 130, 100, 30));
 
-        InputContraseña.setHorizontalAlignment(javax.swing.JTextField.CENTER);
-        InputContraseña.addActionListener(new java.awt.event.ActionListener() {
+        InputContraseña1.setHorizontalAlignment(javax.swing.JTextField.CENTER);
+        InputContraseña1.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                InputContraseñaActionPerformed(evt);
+                InputContraseña1ActionPerformed(evt);
             }
         });
-        jPanel1.add(InputContraseña, new org.netbeans.lib.awtextra.AbsoluteConstraints(140, 130, 190, 30));
+        jPanel1.add(InputContraseña1, new org.netbeans.lib.awtextra.AbsoluteConstraints(130, 130, 150, 30));
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
@@ -167,39 +167,39 @@ public class RegistroUsuario extends javax.swing.JFrame {
     }
     
 
+    private void InputContraseña1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_InputContraseña1ActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_InputContraseña1ActionPerformed
+
     private void BotonRegistrarActionPerformed(java.awt.event.ActionEvent evt) {                                               
         // Obtener los datos ingresados por el usuario y registrarlos en la base de datos 
         String nombre = InputNombre.getText();
         String correo = InputCorreo.getText();
-        //Es un password fiel 
-        char[] password = InputContraseña.getPassword();
-        String contraseña = new String(password);
+        String contraseña = InputContraseña1.getText();
         String tipoUsuario = (String) TipoUsuario.getSelectedItem();
 
-
         /*
-         * SI EL USUARIO ES VETERINARIO, CLIENTE, GERENTE O ADMINISTRADOR
-         * 
-         * veterinario = 1
-         * cliente = 2
-         * gerente = 3
-         * administrador = 4
-         * 
-         * 
+         * Los tipos de usuario son:
+         *  1	Veterinario
+            2	Cliente
+            3	Gerente
+            4	Administrador
+
+            por lo cual dependiendo del tipo de usuario se debe guardar con el numero correspondiente es int
          */
 
-         int tipoUsuarios = 0;
-        if (tipoUsuario.equals("Veterinario")) {
-            tipoUsuarios = 1;
-        } else if (tipoUsuario.equals("Cliente")) {
-            tipoUsuarios = 2;
-        } else if (tipoUsuario.equals("Gerente")) {
-            tipoUsuarios = 3;
-        } else if (tipoUsuario.equals("Administrador")) {
-            tipoUsuarios = 4;
+        int tipo = 0;
+
+        switch (tipoUsuario) {
+            case "Veterinario" -> tipo = 1;
+            case "Cliente" -> tipo = 2;
+            case "Gerente" -> tipo = 3;
+            case "Administrador" -> tipo = 4;
+            default -> {
+            }
         }
 
-        RegistroUsuario1.agregarUsuario(nombre, correo, contraseña, tipoUsuarios);
+
     }
 
     private void InputCorreoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_InputCorreoActionPerformed
@@ -211,15 +211,9 @@ public class RegistroUsuario extends javax.swing.JFrame {
     
     }//GEN-LAST:event_BotonVolverMouseClicked
 
-    private void InputContraseñaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_InputContraseñaActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_InputContraseñaActionPerformed
-
     private void BotonVolverActionPerformed(java.awt.event.ActionEvent evt) {                                            
-        // TODO add your handling code here:
-        GestionClientes menu = new GestionClientes();
-        menu.setVisible(true);
-        this.dispose();
+       
+    
 
     }
 
@@ -261,7 +255,7 @@ public class RegistroUsuario extends javax.swing.JFrame {
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton BotonRegistrar;
     private javax.swing.JButton BotonVolver;
-    private javax.swing.JPasswordField InputContraseña;
+    private javax.swing.JTextField InputContraseña1;
     private javax.swing.JTextField InputCorreo;
     private javax.swing.JTextField InputNombre;
     private javax.swing.JLabel LabelCorreoElectronico;

@@ -24,12 +24,11 @@ public class MenuCliente extends javax.swing.JFrame {
         jButton2 = new javax.swing.JButton();
         jPanel1 = new javax.swing.JPanel();
         TituloLabel = new javax.swing.JLabel();
-        Imagen = new javax.swing.JLabel();
-        CitaRevisión = new javax.swing.JButton();
-        HistorialCompras = new javax.swing.JButton();
-        CompraProductos = new javax.swing.JButton();
+        btnCitaRevisión = new javax.swing.JButton();
+        btnReseñas = new javax.swing.JButton();
         Volver = new javax.swing.JButton();
-        SolicitarCita = new javax.swing.JButton();
+        btnSolicitarCita = new javax.swing.JButton();
+        btnCompraProductos = new javax.swing.JButton();
 
         jButton2.setBackground(new java.awt.Color(153, 255, 255));
         jButton2.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Imagenes/flecha-izquierda.png"))); // NOI18N
@@ -39,47 +38,42 @@ public class MenuCliente extends javax.swing.JFrame {
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setResizable(false);
 
-        jPanel1.setBackground(new java.awt.Color(153, 255, 255));
-        jPanel1.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
+        jPanel1.setBackground(new java.awt.Color(255, 255, 255));
+        jPanel1.setLayout(null);
 
         TituloLabel.setFont(new java.awt.Font("Segoe UI", 1, 18)); // NOI18N
         TituloLabel.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         TituloLabel.setText("MENU CLIENTE");
-        jPanel1.add(TituloLabel, new org.netbeans.lib.awtextra.AbsoluteConstraints(60, 0, 390, 80));
+        jPanel1.add(TituloLabel);
+        TituloLabel.setBounds(60, 0, 170, 50);
 
-        Imagen.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
-        Imagen.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Imagenes/logo (1).png"))); // NOI18N
-        Imagen.setMaximumSize(new java.awt.Dimension(51, 514));
-        Imagen.setPreferredSize(new java.awt.Dimension(514, 54));
-        jPanel1.add(Imagen, new org.netbeans.lib.awtextra.AbsoluteConstraints(280, 90, 180, 170));
-
-        CitaRevisión.setBackground(new java.awt.Color(51, 153, 255));
-        CitaRevisión.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Imagenes/cita.png"))); // NOI18N
-        CitaRevisión.setText("Solicitar cita de revisión");
-        CitaRevisión.setBorder(new javax.swing.border.SoftBevelBorder(javax.swing.border.BevelBorder.RAISED));
-        CitaRevisión.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
-        CitaRevisión.addActionListener(new java.awt.event.ActionListener() {
+        btnCitaRevisión.setBackground(new java.awt.Color(51, 153, 255));
+        btnCitaRevisión.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Imagenes/cita.png"))); // NOI18N
+        btnCitaRevisión.setText("Solicitar cita de revisión");
+        btnCitaRevisión.setBorder(new javax.swing.border.SoftBevelBorder(javax.swing.border.BevelBorder.RAISED));
+        btnCitaRevisión.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
+        btnCitaRevisión.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                CitaRevisiónActionPerformed(evt);
+                btnCitaRevisiónActionPerformed(evt);
             }
         });
-        jPanel1.add(CitaRevisión, new org.netbeans.lib.awtextra.AbsoluteConstraints(50, 140, 170, -1));
+        jPanel1.add(btnCitaRevisión);
+        btnCitaRevisión.setBounds(60, 110, 170, 22);
 
-        HistorialCompras.setBackground(new java.awt.Color(51, 153, 255));
-        HistorialCompras.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Imagenes/expediente.png"))); // NOI18N
-        HistorialCompras.setText("Historial de compras");
-        HistorialCompras.setBorder(new javax.swing.border.SoftBevelBorder(javax.swing.border.BevelBorder.RAISED));
-        HistorialCompras.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
-        jPanel1.add(HistorialCompras, new org.netbeans.lib.awtextra.AbsoluteConstraints(50, 180, 170, -1));
+        btnReseñas.setBackground(new java.awt.Color(51, 153, 255));
+        btnReseñas.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Imagenes/consulta.png"))); // NOI18N
+        btnReseñas.setText("Reseña de productos");
+        btnReseñas.setBorder(new javax.swing.border.SoftBevelBorder(javax.swing.border.BevelBorder.RAISED));
+        btnReseñas.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
+        btnReseñas.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnReseñasActionPerformed(evt);
+            }
+        });
+        jPanel1.add(btnReseñas);
+        btnReseñas.setBounds(60, 190, 170, 22);
 
-        CompraProductos.setBackground(new java.awt.Color(51, 153, 255));
-        CompraProductos.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Imagenes/consulta.png"))); // NOI18N
-        CompraProductos.setText("Comprar productos");
-        CompraProductos.setBorder(new javax.swing.border.SoftBevelBorder(javax.swing.border.BevelBorder.RAISED));
-        CompraProductos.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
-        jPanel1.add(CompraProductos, new org.netbeans.lib.awtextra.AbsoluteConstraints(50, 220, 170, -1));
-
-        Volver.setBackground(new java.awt.Color(153, 255, 255));
+        Volver.setBackground(new java.awt.Color(255, 255, 255));
         Volver.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Imagenes/flecha-izquierda.png"))); // NOI18N
         Volver.setBorder(null);
         Volver.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
@@ -88,41 +82,56 @@ public class MenuCliente extends javax.swing.JFrame {
                 VolverActionPerformed(evt);
             }
         });
-        jPanel1.add(Volver, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 70, 60));
+        jPanel1.add(Volver);
+        Volver.setBounds(0, 0, 40, 40);
 
-        SolicitarCita.setBackground(new java.awt.Color(51, 153, 255));
-        SolicitarCita.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Imagenes/cita.png"))); // NOI18N
-        SolicitarCita.setText("Solicitar Cita");
-        SolicitarCita.setBorder(new javax.swing.border.SoftBevelBorder(javax.swing.border.BevelBorder.RAISED));
-        SolicitarCita.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
-        SolicitarCita.addActionListener(new java.awt.event.ActionListener() {
+        btnSolicitarCita.setBackground(new java.awt.Color(51, 153, 255));
+        btnSolicitarCita.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Imagenes/cita.png"))); // NOI18N
+        btnSolicitarCita.setText("Solicitar Cita");
+        btnSolicitarCita.setBorder(new javax.swing.border.SoftBevelBorder(javax.swing.border.BevelBorder.RAISED));
+        btnSolicitarCita.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
+        btnSolicitarCita.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                SolicitarCitaActionPerformed(evt);
+                btnSolicitarCitaActionPerformed(evt);
             }
         });
-        jPanel1.add(SolicitarCita, new org.netbeans.lib.awtextra.AbsoluteConstraints(50, 100, 170, -1));
+        jPanel1.add(btnSolicitarCita);
+        btnSolicitarCita.setBounds(60, 70, 170, 22);
+
+        btnCompraProductos.setBackground(new java.awt.Color(51, 153, 255));
+        btnCompraProductos.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Imagenes/consulta.png"))); // NOI18N
+        btnCompraProductos.setText("Comprar productos");
+        btnCompraProductos.setBorder(new javax.swing.border.SoftBevelBorder(javax.swing.border.BevelBorder.RAISED));
+        btnCompraProductos.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
+        btnCompraProductos.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnCompraProductosActionPerformed(evt);
+            }
+        });
+        jPanel1.add(btnCompraProductos);
+        btnCompraProductos.setBounds(60, 150, 170, 22);
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(jPanel1, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+            .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, 289, javax.swing.GroupLayout.PREFERRED_SIZE)
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, 319, javax.swing.GroupLayout.PREFERRED_SIZE)
+            .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, 258, javax.swing.GroupLayout.PREFERRED_SIZE)
         );
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
-    private void CitaRevisiónActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_CitaRevisiónActionPerformed
+    private void btnCitaRevisiónActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnCitaRevisiónActionPerformed
         // TODO add your handling code here:
-    }//GEN-LAST:event_CitaRevisiónActionPerformed
+    }//GEN-LAST:event_btnCitaRevisiónActionPerformed
 
-    private void SolicitarCitaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_SolicitarCitaActionPerformed
+    private void btnSolicitarCitaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnSolicitarCitaActionPerformed
         // TODO add your handling code here:
-    }//GEN-LAST:event_SolicitarCitaActionPerformed
+    }//GEN-LAST:event_btnSolicitarCitaActionPerformed
 
     private void VolverActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_VolverActionPerformed
         // TODO add your handling code here:
@@ -131,9 +140,20 @@ public class MenuCliente extends javax.swing.JFrame {
         this.dispose();
     }//GEN-LAST:event_VolverActionPerformed
 
-    /**
-     * @param args the command line arguments
-     */
+    private void btnReseñasActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnReseñasActionPerformed
+        Reseñas_Productos res = new Reseñas_Productos();
+        res.setVisible(true);
+        this.setVisible(false);
+                
+    }//GEN-LAST:event_btnReseñasActionPerformed
+
+    private void btnCompraProductosActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnCompraProductosActionPerformed
+        this.dispose();
+        Venta_Articulos venta = new Venta_Articulos();
+        venta.setVisible(true);
+    }//GEN-LAST:event_btnCompraProductosActionPerformed
+
+
     public static void main(String args[]) {
         /* Set the Nimbus look and feel */
         //<editor-fold defaultstate="collapsed" desc=" Look and feel setting code (optional) ">
@@ -168,13 +188,12 @@ public class MenuCliente extends javax.swing.JFrame {
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private javax.swing.JButton CitaRevisión;
-    private javax.swing.JButton CompraProductos;
-    private javax.swing.JButton HistorialCompras;
-    private javax.swing.JLabel Imagen;
-    private javax.swing.JButton SolicitarCita;
     private javax.swing.JLabel TituloLabel;
     private javax.swing.JButton Volver;
+    private javax.swing.JButton btnCitaRevisión;
+    private javax.swing.JButton btnCompraProductos;
+    private javax.swing.JButton btnReseñas;
+    private javax.swing.JButton btnSolicitarCita;
     private javax.swing.JButton jButton2;
     private javax.swing.JPanel jPanel1;
     // End of variables declaration//GEN-END:variables
