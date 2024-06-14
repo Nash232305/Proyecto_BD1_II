@@ -7,9 +7,10 @@ import javax.swing.JOptionPane;
 public class Informacion_Pago extends javax.swing.JFrame {
     
     ArrayList<ItemVenta> articulos = new ArrayList<>();
-   
+    int idUsuario;
     public Informacion_Pago() {
         initComponents();
+        txtNumTarjeta.setEditable(true);
         this.setTitle("Información de Pago");
         this.setSize(416, 509);
         tarjeta();
@@ -18,7 +19,13 @@ public class Informacion_Pago extends javax.swing.JFrame {
         this.setLocationRelativeTo(null);
     }
 
-    
+    public int getIdUsuario() {
+        return idUsuario;
+    }
+
+    public void setIdUsuario(int idUsuario) {
+        this.idUsuario = idUsuario;
+    }
 
     public ArrayList<ItemVenta> getArticulos() {
         return articulos;
@@ -36,22 +43,17 @@ public class Informacion_Pago extends javax.swing.JFrame {
     }
     
     private boolean validarEntradasTarjeta(){
-        if( txtNombre.getText().length() <= 100 && txtNombre.getText().length() > 0)
-            if (txtDirecc.getText().length() <= 500 && txtDirecc.getText().length() > 0)
-                if (isInt(txtNumTarjeta.getText()))
-                    if (isInt(txtCodExp.getText()))
-                        if (valDate())
-                            return true; 
-                        else 
-                            JOptionPane.showMessageDialog(null,"Mal formato de fecha, el formato debe ser MM/YY.","Error",JOptionPane.ERROR_MESSAGE);
-                    else
-                        JOptionPane.showMessageDialog(null,"Mal formato de código de expiración.","Error",JOptionPane.ERROR_MESSAGE);
-                else
-                    JOptionPane.showMessageDialog(null,"Mal formato de número de tarjeta.","Error",JOptionPane.ERROR_MESSAGE);
+        
+        if (isInt(txtNumTarjeta.getText()))
+            if (isInt(txtCodExp.getText()))
+                if (valDate())
+                    return true; 
+                else 
+                    JOptionPane.showMessageDialog(null,"Mal formato de fecha, el formato debe ser MM/YY.","Error",JOptionPane.ERROR_MESSAGE);
             else
-                JOptionPane.showMessageDialog(null,"La dirección debe ser menor a 500 caracteres.","Error",JOptionPane.ERROR_MESSAGE);
+                JOptionPane.showMessageDialog(null,"Mal formato de código de expiración.","Error",JOptionPane.ERROR_MESSAGE);
         else
-            JOptionPane.showMessageDialog(null,"El nombre debe ser menor a 100 caracteres.","Error",JOptionPane.ERROR_MESSAGE);
+            JOptionPane.showMessageDialog(null,"Mal formato de número de tarjeta.","Error",JOptionPane.ERROR_MESSAGE);
         return false;
     }
     
@@ -124,7 +126,7 @@ public class Informacion_Pago extends javax.swing.JFrame {
         lblNumTarjeta.setForeground(new java.awt.Color(0, 0, 0));
         lblNumTarjeta.setText("Número de Tarjeta");
         pnlInformacionPago.add(lblNumTarjeta);
-        lblNumTarjeta.setBounds(30, 197, 250, 25);
+        lblNumTarjeta.setBounds(30, 77, 250, 25);
 
         btnSaveIP.setBackground(new java.awt.Color(176, 33, 33));
         btnSaveIP.setFont(new java.awt.Font("Segoe UI", 0, 18)); // NOI18N
@@ -136,7 +138,7 @@ public class Informacion_Pago extends javax.swing.JFrame {
             }
         });
         pnlInformacionPago.add(btnSaveIP);
-        btnSaveIP.setBounds(190, 380, 110, 40);
+        btnSaveIP.setBounds(180, 260, 110, 40);
 
         lblNom.setFont(new java.awt.Font("Segoe UI", 0, 18)); // NOI18N
         lblNom.setForeground(new java.awt.Color(0, 0, 0));
@@ -162,7 +164,7 @@ public class Informacion_Pago extends javax.swing.JFrame {
         txtNumTarjeta.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
         txtNumTarjeta.setForeground(new java.awt.Color(0, 0, 0));
         pnlInformacionPago.add(txtNumTarjeta);
-        txtNumTarjeta.setBounds(30, 220, 300, 30);
+        txtNumTarjeta.setBounds(30, 100, 300, 30);
 
         txtNombre.setBackground(new java.awt.Color(255, 255, 255));
         txtNombre.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
@@ -191,19 +193,19 @@ public class Informacion_Pago extends javax.swing.JFrame {
             }
         });
         pnlInformacionPago.add(btnCancelarIP);
-        btnCancelarIP.setBounds(60, 380, 110, 40);
+        btnCancelarIP.setBounds(60, 260, 110, 40);
 
         txtFecExp.setBackground(new java.awt.Color(255, 255, 255));
         txtFecExp.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
         txtFecExp.setForeground(new java.awt.Color(0, 0, 0));
         pnlInformacionPago.add(txtFecExp);
-        txtFecExp.setBounds(30, 280, 300, 30);
+        txtFecExp.setBounds(30, 160, 300, 30);
 
         lblFecExp.setFont(new java.awt.Font("Segoe UI", 0, 18)); // NOI18N
         lblFecExp.setForeground(new java.awt.Color(0, 0, 0));
         lblFecExp.setText("Fecha de Expiración");
         pnlInformacionPago.add(lblFecExp);
-        lblFecExp.setBounds(30, 257, 250, 25);
+        lblFecExp.setBounds(30, 137, 250, 25);
 
         rbtnContrapedido.setForeground(new java.awt.Color(0, 0, 0));
         rbtnContrapedido.setText("Envío");
@@ -229,23 +231,27 @@ public class Informacion_Pago extends javax.swing.JFrame {
         txtCodExp.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
         txtCodExp.setForeground(new java.awt.Color(0, 0, 0));
         pnlInformacionPago.add(txtCodExp);
-        txtCodExp.setBounds(30, 340, 300, 30);
+        txtCodExp.setBounds(30, 220, 300, 30);
 
         lblCodExp.setFont(new java.awt.Font("Segoe UI", 0, 18)); // NOI18N
         lblCodExp.setForeground(new java.awt.Color(0, 0, 0));
         lblCodExp.setText("Código de Expiración");
         pnlInformacionPago.add(lblCodExp);
-        lblCodExp.setBounds(30, 317, 250, 25);
+        lblCodExp.setBounds(30, 190, 250, 25);
 
         pnlBackgroundRP.add(pnlInformacionPago);
-        pnlInformacionPago.setBounds(20, 20, 360, 430);
+        pnlInformacionPago.setBounds(20, 20, 360, 320);
 
         getContentPane().add(pnlBackgroundRP);
-        pnlBackgroundRP.setBounds(0, 0, 400, 470);
+        pnlBackgroundRP.setBounds(0, 0, 400, 360);
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
     private void contrapedido(){
+        lblNom.setVisible(true);
+        txtNombre.setVisible(true);
+        lblDirecc.setVisible(true);
+        txtDirecc.setVisible(true);
         lblNumTarjeta.setVisible(false);
         txtNumTarjeta.setVisible(false);
         lblFecExp.setVisible(false);
@@ -253,6 +259,7 @@ public class Informacion_Pago extends javax.swing.JFrame {
         lblCodExp.setVisible(false);
         txtCodExp.setVisible(false);
         rbtnTarjeta.setSelected(false);
+        
         pnlInformacionPago.setSize(360,250);
         btnCancelarIP.setLocation(btnCancelarIP.getLocation().x, 197);
         btnSaveIP.setLocation(btnSaveIP.getLocation().x, 197);
@@ -261,25 +268,27 @@ public class Informacion_Pago extends javax.swing.JFrame {
     }
     
     private void tarjeta(){
+        lblNom.setVisible(false);
+        lblDirecc.setVisible(false);
+        txtNombre.setVisible(false);
+        txtDirecc.setVisible(false);
         lblNumTarjeta.setVisible(true);
+        
         txtNumTarjeta.setVisible(true);
+        
         lblFecExp.setVisible(true);
         txtFecExp.setVisible(true);
         lblCodExp.setVisible(true);
         txtCodExp.setVisible(true);
         rbtnContrapedido.setSelected(false);
-        this.setSize(416, 509);
-        pnlInformacionPago.setSize(360, 430);
-        btnCancelarIP.setLocation(60, 380);
-        btnSaveIP.setLocation(190, 380);
-        pnlBackgroundRP.setSize(400, 470);
+        this.setSize(416, 400);
+        pnlInformacionPago.setSize(360, 320);
+        btnCancelarIP.setLocation(60, 260);
+        btnSaveIP.setLocation(180, 260);
+        pnlBackgroundRP.setSize(400, 360);
         
     }
     
-    private void txtNombreActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtNombreActionPerformed
-        
-    }//GEN-LAST:event_txtNombreActionPerformed
-
     private void btnCancelarIPActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnCancelarIPActionPerformed
         this.dispose();
         Venta_Articulos venta = new Venta_Articulos();
@@ -287,8 +296,8 @@ public class Informacion_Pago extends javax.swing.JFrame {
     }//GEN-LAST:event_btnCancelarIPActionPerformed
 
     private void btnSaveIPActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnSaveIPActionPerformed
-        if ((getTipo() == 10 &&   validarEntradasContrapedido()) || (getTipo() == 9 && validarEntradasTarjeta()) ){
-            int filas = Modelo.VentaAccess.agregarPedido(txtNombre.getText(), txtDirecc.getText());
+        if (getTipo() == 10 &&   validarEntradasContrapedido()){
+            int filas = Modelo.VentaAccess.agregarPedido(idUsuario,txtNombre.getText(), txtDirecc.getText());
             int lastPed = Modelo.VentaAccess.getUltimoPedido();
             int acum = 0;
             for (int i = 0; i < articulos.size(); i++) {
@@ -302,6 +311,30 @@ public class Informacion_Pago extends javax.swing.JFrame {
                 Venta_Articulos venta = new Venta_Articulos();
                 venta.setVisible(true);
             }   
+        }else if (getTipo() == 9 && validarEntradasTarjeta()){
+            int filas = Modelo.VentaAccess.agregarPedido(idUsuario,txtNombre.getText(), txtDirecc.getText());
+            int lastPed = Modelo.VentaAccess.getUltimoPedido();
+            int acum = 0;
+            for (int i = 0; i < articulos.size(); i++) {
+                ItemVenta art = articulos.get(i);
+                acum += Modelo.VentaAccess.agregarDetallePedido(lastPed, art.getCodigo(),art.getCant());
+            }
+            Modelo.VentaAccess.actualizarEncabezado(lastPed);
+            
+            filas = Modelo.VentaAccess.agregarFactura(idUsuario);
+            int lastFac = Modelo.VentaAccess.getUltimaFactura();
+            acum = 0;
+            for (int i = 0; i < articulos.size(); i++) {
+                ItemVenta art = articulos.get(i);
+                acum += Modelo.VentaAccess.agregarDetalleFactura(lastFac, art.getCodigo(),art.getCant());
+            }
+            Modelo.VentaAccess.actualizarEncabezadoFactura(lastFac);
+            if (filas != 0 && acum == articulos.size()){
+                JOptionPane.showMessageDialog(null,"Pedido solicitado con éxito.","Éxito",JOptionPane.INFORMATION_MESSAGE);
+                this.dispose();
+                Venta_Articulos venta = new Venta_Articulos();
+                venta.setVisible(true);
+            }
         }
     }//GEN-LAST:event_btnSaveIPActionPerformed
 
@@ -312,6 +345,10 @@ public class Informacion_Pago extends javax.swing.JFrame {
     private void rbtnTarjetaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_rbtnTarjetaActionPerformed
         tarjeta();
     }//GEN-LAST:event_rbtnTarjetaActionPerformed
+
+    private void txtNombreActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtNombreActionPerformed
+
+    }//GEN-LAST:event_txtNombreActionPerformed
 
     public static void main(String args[]) {
         /* Set the Nimbus look and feel */

@@ -8,7 +8,7 @@ import javax.swing.*;
 
 public class Venta_Articulos extends javax.swing.JFrame {
     
-    
+    int sesion,idUsuario;
     ArrayList<ItemVenta> articulos = new ArrayList<>();
     public Venta_Articulos() {
         initComponents();
@@ -19,6 +19,24 @@ public class Venta_Articulos extends javax.swing.JFrame {
         lstCarrito.setModel(new DefaultListModel<>());
         
         refrescarLista();
+    }
+
+    public int getIdUsuario() {
+        return idUsuario;
+    }
+
+    public void setIdUsuario(int idUsuario) {
+        this.idUsuario = idUsuario;
+    }
+    
+    
+
+    public int getSesion() {
+        return sesion;
+    }
+
+    public void setSesion(int sesion) {
+        this.sesion = sesion;
     }
     
     public void refrescarLista(){
@@ -192,7 +210,7 @@ public class Venta_Articulos extends javax.swing.JFrame {
         this.dispose();
         MenuCliente cliente = new MenuCliente();
         cliente.setVisible(true);
-                
+        cliente.setSesion(this.sesion);
     }//GEN-LAST:event_btnCerrarSesionActionPerformed
 
     private void btnComprarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnComprarActionPerformed
@@ -200,6 +218,7 @@ public class Venta_Articulos extends javax.swing.JFrame {
             Informacion_Pago pago = new Informacion_Pago();
             pago.setVisible(true);
             pago.setArticulos(articulos);
+            pago.setIdUsuario(idUsuario);
             this.dispose();
         }else
             JOptionPane.showMessageDialog(null,"Tu carrito está vacío.","Error",JOptionPane.ERROR_MESSAGE);

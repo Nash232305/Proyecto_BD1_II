@@ -2,6 +2,7 @@ package Vista;
 
 import Modelo.LoginAccess;
 import java.awt.*;
+import java.util.ArrayList;
 
 public class Login extends javax.swing.JFrame {
     
@@ -12,7 +13,7 @@ public class Login extends javax.swing.JFrame {
         this.setBackground(new Color(255,120,120));   
         this.setResizable(false);
         this.setLocationRelativeTo(null);
-    }
+    }//11   15
 
     @SuppressWarnings("unchecked")
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
@@ -26,6 +27,7 @@ public class Login extends javax.swing.JFrame {
         lblContra = new javax.swing.JLabel();
         txtUser = new javax.swing.JTextField();
         txtPass = new javax.swing.JPasswordField();
+        jLabel1 = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setBackground(new java.awt.Color(255, 120, 120));
@@ -55,7 +57,7 @@ public class Login extends javax.swing.JFrame {
             }
         });
         pnl_Login.add(btnLogin);
-        btnLogin.setBounds(90, 230, 120, 40);
+        btnLogin.setBounds(90, 210, 120, 40);
 
         lblCorreo.setFont(new java.awt.Font("Segoe UI", 0, 18)); // NOI18N
         lblCorreo.setForeground(new java.awt.Color(0, 0, 0));
@@ -73,6 +75,18 @@ public class Login extends javax.swing.JFrame {
         pnl_Login.add(txtPass);
         txtPass.setBounds(20, 160, 260, 30);
 
+        jLabel1.setFont(new java.awt.Font("Segoe UI", 0, 18)); // NOI18N
+        jLabel1.setForeground(new java.awt.Color(0, 0, 0));
+        jLabel1.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+        jLabel1.setText("Continuar sin sesión");
+        jLabel1.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                jLabel1MouseClicked(evt);
+            }
+        });
+        pnl_Login.add(jLabel1);
+        jLabel1.setBounds(10, 260, 280, 25);
+
         pnlBackgroundLogin.add(pnl_Login);
         pnl_Login.setBounds(130, 40, 300, 320);
 
@@ -83,11 +97,24 @@ public class Login extends javax.swing.JFrame {
     }// </editor-fold>//GEN-END:initComponents
     
     private void btnLoginActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnLoginActionPerformed
-        int tipo = LoginAccess.verificarUsuario(txtUser.getText(), txtPass.getText());
-        GuiFactory(tipo);
+        if(!"".equals(txtUser.getText()) && !"".equals(txtPass.getText()) ){
+            ArrayList<String> info = LoginAccess.verificarUsuario(txtUser.getText(), txtPass.getText());
+            if (info != null){
+                int tipo = Integer.parseInt(info.get(1));
+                int id = Integer.parseInt(info.get(0));
+                if (tipo == 6)
+                    GuiFactory( tipo, false,id);
+                else
+                    GuiFactory( tipo, true,id);
+            }
+        }
     }//GEN-LAST:event_btnLoginActionPerformed
+
+    private void jLabel1MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jLabel1MouseClicked
+        GuiFactory(2,false,9);
+    }//GEN-LAST:event_jLabel1MouseClicked
     
-    private void GuiFactory(int tipoUsuario){
+    private void GuiFactory(int tipoUsuario,boolean flag,int idUsuario){
         switch(tipoUsuario){
             case 1:
                 MenuVeterinario veterinario = new MenuVeterinario();
@@ -97,6 +124,14 @@ public class Login extends javax.swing.JFrame {
             case 2:
                 MenuCliente cliente = new MenuCliente();
                 cliente.setVisible(true);
+                if ( !flag ){
+                    cliente.setSesion(6);
+                    cliente.setIdUsuario(idUsuario);
+                }else{
+                    cliente.setSesion(2);
+                    cliente.setIdUsuario(idUsuario);
+                }
+                    
                 this.dispose();
                 break;
             case 3:
@@ -149,6 +184,7 @@ public class Login extends javax.swing.JFrame {
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton btnLogin;
+    private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel lblContra;
     private javax.swing.JLabel lblCorreo;
     private javax.swing.JLabel lblTittleLogin;

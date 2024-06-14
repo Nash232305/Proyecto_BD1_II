@@ -8,7 +8,7 @@ public class Reseñas_Productos extends javax.swing.JFrame {
 
     boolean flag = true;
     String cod = "";
-    
+    int sesion;
     public Reseñas_Productos() {
         initComponents();
         this.setTitle("Gestion de Inventario");
@@ -18,8 +18,13 @@ public class Reseñas_Productos extends javax.swing.JFrame {
         btnActualizar.setVisible(false);
     }
 
-    
-    
+    public int getSesion() {
+        return sesion;
+    }
+
+    public void setSesion(int sesion) {
+        this.sesion = sesion;
+    }
 
     @SuppressWarnings("unchecked")
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
@@ -59,7 +64,7 @@ public class Reseñas_Productos extends javax.swing.JFrame {
             }
         });
         pnlSuperior.add(btnAtras);
-        btnAtras.setBounds(10, 10, 76, 40);
+        btnAtras.setBounds(10, 30, 76, 40);
 
         pnlPrincipal.add(pnlSuperior);
         pnlSuperior.setBounds(0, 0, 813, 100);
@@ -203,6 +208,7 @@ public class Reseñas_Productos extends javax.swing.JFrame {
     private void btnAtrasActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnAtrasActionPerformed
         MenuCliente cliente = new MenuCliente();
         cliente.setVisible(true);
+        cliente.setSesion(sesion);
         this.dispose();
     }//GEN-LAST:event_btnAtrasActionPerformed
 

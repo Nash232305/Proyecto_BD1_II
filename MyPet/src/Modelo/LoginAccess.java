@@ -4,6 +4,7 @@ import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.util.ArrayList;
 
 
 
@@ -43,37 +44,29 @@ public class LoginAccess {
         LoginAccess.tipoUsuario = tipoUsuario;
     }
 
-    public static int verificarUsuario(String usuario, String contrasena) {
-        Connection connection = null;
-        PreparedStatement statement = null;
-        ResultSet resultSet = null;
-        String idUsuario = "",nombre = "";
-        int idTipo = 0;
+    public static ArrayList<String> verificarUsuario(String usuario, String contrasena) {
+        ArrayList<String> info = new ArrayList<>();
         try {
-            connection = SQLConnection.getConnection();
+            Connection connection = SQLConnection.getConnection();
             String sql = "exec LoginUsuario ?, ?";
-            statement = connection.prepareStatement(sql);
+            PreparedStatement statement = connection.prepareStatement(sql);
             statement.setString(1, usuario);
             statement.setString(2, contrasena);
             
-            resultSet = statement.executeQuery();
+            ResultSet resultSet = statement.executeQuery();
             
             while (resultSet.next()) {
-                idUsuario = resultSet.getInt(1) + "";
-                idTipo = resultSet.getInt(2);
-                nombre = resultSet.getString(3);
+                info.add(resultSet.getInt(1) + "");
+                info.add(resultSet.getInt(2) + "");
+                info.add(resultSet.getString(3) + "");
+                
             }
-            System.out.println("pene: " + nombre);
-            return idTipo;
+            connection.close();
+            
         } catch (SQLException e) {
-            return 0;
+            return null;
         } finally {
-            try {
-                if (connection != null) 
-                    connection.close();
-            } catch (SQLException ex) {
-                System.err.println("no se cerro la cone");
-            }
+            return info;
         }
     }
     
