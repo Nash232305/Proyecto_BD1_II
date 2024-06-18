@@ -118,4 +118,47 @@ public class ClientesAccess {
             return 0;
         }
     }
+    
+    public static void getUsuarios(JList<String> lst){
+        String str = "";
+        DefaultListModel<String> model = new DefaultListModel<>();
+        lst.setModel(model);
+        try{
+            Connection connection = SQLConnection.getConnection();
+            Statement statement = connection.createStatement();
+
+            String selectSql = "EXEC getUsuarios";
+            ResultSet resultSet = statement.executeQuery(selectSql);
+
+            while (resultSet.next()){
+                str += 
+                        "Cód: " + resultSet.getInt(1)+ 
+                        "   Nombre: " + resultSet.getString(2)+
+                        "   Correo: " + resultSet.getString(3)+
+                        "   Tipo: " + resultSet.getString(4) ;
+                model.addElement(str);
+                str= "";
+            }
+            connection.close();
+        } catch (SQLException ex) {
+            ex.printStackTrace();
+        }
+    }
+    
+    public static int setUserType(int id, int tipo){
+        try{
+            Connection connection = SQLConnection.getConnection();
+            String sql = "EXEC setUserType ?,?";
+            PreparedStatement statement = connection.prepareStatement(sql);
+            statement.setInt(1, id);  
+            statement.setInt(2, tipo);
+            int filasActualizadas = statement.executeUpdate();
+            connection.close();
+            return filasActualizadas;
+        } catch (SQLException ex) {
+            return 0;
+        }
+    }
+    
+    
 }

@@ -23,8 +23,6 @@ public class ItemVenta {
     public String toString() {
         return "codigo: " + codigo + " cant: " + cant + " precio: " + precio + " descripcion: " + descripcion + "\n";
     }
-    
-    
 
     public int getCodigo() {
         return codigo;

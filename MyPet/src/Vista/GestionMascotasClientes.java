@@ -7,7 +7,6 @@ public class GestionMascotasClientes extends javax.swing.JFrame {
     public GestionMascotasClientes() {
         initComponents();
         setLocationRelativeTo(null);
-        actualizarClientes();
     }
 
     public int getIdUsuario() {
@@ -93,7 +92,10 @@ public class GestionMascotasClientes extends javax.swing.JFrame {
     }// </editor-fold>//GEN-END:initComponents
 
     private void VolverActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_VolverActionPerformed
-        
+        MenuCliente cliente = new MenuCliente();
+        cliente.setIdUsuario(idUsuario);
+        cliente.setVisible(true);
+        this.dispose();
     }//GEN-LAST:event_VolverActionPerformed
 
     private void btnAgregarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnAgregarActionPerformed

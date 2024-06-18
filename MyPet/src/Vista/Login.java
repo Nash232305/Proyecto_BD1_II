@@ -3,6 +3,7 @@ package Vista;
 import Modelo.LoginAccess;
 import java.awt.*;
 import java.util.ArrayList;
+import javax.swing.JOptionPane;
 
 public class Login extends javax.swing.JFrame {
     
@@ -13,7 +14,7 @@ public class Login extends javax.swing.JFrame {
         this.setBackground(new Color(255,120,120));   
         this.setResizable(false);
         this.setLocationRelativeTo(null);
-    }//11   15
+    }
 
     @SuppressWarnings("unchecked")
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
@@ -99,14 +100,16 @@ public class Login extends javax.swing.JFrame {
     private void btnLoginActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnLoginActionPerformed
         if(!"".equals(txtUser.getText()) && !"".equals(txtPass.getText()) ){
             ArrayList<String> info = LoginAccess.verificarUsuario(txtUser.getText(), txtPass.getText());
-            if (info != null){
+            if (info != null && info.size()>0){
                 int tipo = Integer.parseInt(info.get(1));
                 int id = Integer.parseInt(info.get(0));
                 if (tipo == 6)
                     GuiFactory( tipo, false,id);
                 else
                     GuiFactory( tipo, true,id);
-            }
+            }else
+                JOptionPane.showMessageDialog(null,"Inicio de sesión incorrecto, inténtelo nuevamente.","Error",JOptionPane.ERROR_MESSAGE);
+                
         }
     }//GEN-LAST:event_btnLoginActionPerformed
 
@@ -119,6 +122,7 @@ public class Login extends javax.swing.JFrame {
             case 1:
                 MenuVeterinario veterinario = new MenuVeterinario();
                 veterinario.setVisible(true);
+                veterinario.setIdUsuario(idUsuario);
                 this.dispose();
                 break;
             case 2:
@@ -131,7 +135,6 @@ public class Login extends javax.swing.JFrame {
                     cliente.setSesion(2);
                     cliente.setIdUsuario(idUsuario);
                 }
-                    
                 this.dispose();
                 break;
             case 3:
@@ -142,6 +145,7 @@ public class Login extends javax.swing.JFrame {
             case 4:
                 MenuAdministracion admin = new MenuAdministracion();
                 admin.setVisible(true);
+                admin.setIdUsuario(idUsuario);
                 this.dispose();
                 break;
             default:
@@ -149,12 +153,8 @@ public class Login extends javax.swing.JFrame {
         }
     }
     
-    
     public static void main(String args[]) {
-        /* Set the Nimbus look and feel */
-        //<editor-fold defaultstate="collapsed" desc=" Look and feel setting code (optional) ">
-        /* If Nimbus (introduced in Java SE 6) is not available, stay with the default look and feel.
-         * For details see http://download.oracle.com/javase/tutorial/uiswing/lookandfeel/plaf.html 
+        /* alfredo + nashe = amor limonica
          */
         try {
             for (javax.swing.UIManager.LookAndFeelInfo info : javax.swing.UIManager.getInstalledLookAndFeels()) {

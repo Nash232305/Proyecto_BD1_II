@@ -2,60 +2,52 @@ package Vista;
 
 public class MenuAdministracion extends javax.swing.JFrame {
 
+    int idUsuario;
+    
     public MenuAdministracion() {
         initComponents();
         setLocationRelativeTo(null);
     }
 
+    public void setIdUsuario(int idUsuario) {
+        this.idUsuario = idUsuario;
+    }
+
+    
     @SuppressWarnings("unchecked")
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
         jPanel1 = new javax.swing.JPanel();
-        AsignaciónCitas = new javax.swing.JButton();
-        AdminCitasUsuarios = new javax.swing.JButton();
-        GestionarProductos = new javax.swing.JButton();
+        btnCitas = new javax.swing.JButton();
         jPanel2 = new javax.swing.JPanel();
         Volver = new javax.swing.JButton();
         Titulo = new javax.swing.JLabel();
         GestionarUsuarios = new javax.swing.JButton();
+        btnExpediente = new javax.swing.JButton();
+        btnCobroCita = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setResizable(false);
 
-        jPanel1.setBackground(new java.awt.Color(153, 255, 255));
+        jPanel1.setBackground(new java.awt.Color(255, 255, 255));
         jPanel1.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
-        AsignaciónCitas.setBackground(new java.awt.Color(51, 153, 255));
-        AsignaciónCitas.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Imagenes/ventas.png"))); // NOI18N
-        AsignaciónCitas.setText("Asignaciones de citas");
-        AsignaciónCitas.setBorder(new javax.swing.border.SoftBevelBorder(javax.swing.border.BevelBorder.RAISED));
-        AsignaciónCitas.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
-        jPanel1.add(AsignaciónCitas, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 230, 210, -1));
-
-        AdminCitasUsuarios.setBackground(new java.awt.Color(51, 153, 255));
-        AdminCitasUsuarios.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Imagenes/calendario (1).png"))); // NOI18N
-        AdminCitasUsuarios.setText(" Administrar citas de usuarios");
-        AdminCitasUsuarios.setBorder(new javax.swing.border.SoftBevelBorder(javax.swing.border.BevelBorder.RAISED));
-        AdminCitasUsuarios.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
-        AdminCitasUsuarios.addActionListener(new java.awt.event.ActionListener() {
+        btnCitas.setBackground(new java.awt.Color(51, 153, 255));
+        btnCitas.setText("Citas");
+        btnCitas.setBorder(new javax.swing.border.SoftBevelBorder(javax.swing.border.BevelBorder.RAISED));
+        btnCitas.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
+        btnCitas.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                AdminCitasUsuariosActionPerformed(evt);
+                btnCitasActionPerformed(evt);
             }
         });
-        jPanel1.add(AdminCitasUsuarios, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 140, 210, -1));
+        jPanel1.add(btnCitas, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 100, 210, -1));
 
-        GestionarProductos.setBackground(new java.awt.Color(51, 153, 255));
-        GestionarProductos.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Imagenes/medicina.png"))); // NOI18N
-        GestionarProductos.setText("Gestionar productos");
-        GestionarProductos.setBorder(new javax.swing.border.SoftBevelBorder(javax.swing.border.BevelBorder.RAISED));
-        GestionarProductos.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
-        jPanel1.add(GestionarProductos, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 180, 210, -1));
-
-        jPanel2.setBackground(new java.awt.Color(153, 255, 255));
+        jPanel2.setBackground(new java.awt.Color(255, 255, 255));
         jPanel2.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
-        Volver.setBackground(new java.awt.Color(153, 255, 255));
+        Volver.setBackground(new java.awt.Color(255, 255, 255));
         Volver.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Imagenes/flecha-izquierda.png"))); // NOI18N
         Volver.setBorder(null);
         Volver.setBorderPainted(false);
@@ -65,17 +57,16 @@ public class MenuAdministracion extends javax.swing.JFrame {
                 VolverActionPerformed(evt);
             }
         });
-        jPanel2.add(Volver, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 70, 60));
+        jPanel2.add(Volver, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 30, 30));
 
         Titulo.setFont(new java.awt.Font("Segoe UI", 1, 18)); // NOI18N
         Titulo.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         Titulo.setText("Menu administrativo");
-        jPanel2.add(Titulo, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 470, 60));
+        jPanel2.add(Titulo, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 0, 200, 60));
 
         jPanel1.add(jPanel2, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 410, 60));
 
         GestionarUsuarios.setBackground(new java.awt.Color(51, 153, 255));
-        GestionarUsuarios.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Imagenes/expediente.png"))); // NOI18N
         GestionarUsuarios.setText("Gestionar usuarios");
         GestionarUsuarios.setBorder(new javax.swing.border.SoftBevelBorder(javax.swing.border.BevelBorder.RAISED));
         GestionarUsuarios.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
@@ -84,27 +75,51 @@ public class MenuAdministracion extends javax.swing.JFrame {
                 GestionarUsuariosActionPerformed(evt);
             }
         });
-        jPanel1.add(GestionarUsuarios, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 100, 210, -1));
+        jPanel1.add(GestionarUsuarios, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 70, 210, -1));
+
+        btnExpediente.setBackground(new java.awt.Color(51, 153, 255));
+        btnExpediente.setText("Expedientes");
+        btnExpediente.setBorder(new javax.swing.border.SoftBevelBorder(javax.swing.border.BevelBorder.RAISED));
+        btnExpediente.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
+        btnExpediente.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnExpedienteActionPerformed(evt);
+            }
+        });
+        jPanel1.add(btnExpediente, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 130, 210, -1));
+
+        btnCobroCita.setBackground(new java.awt.Color(51, 153, 255));
+        btnCobroCita.setText("Cobro de citas");
+        btnCobroCita.setBorder(new javax.swing.border.SoftBevelBorder(javax.swing.border.BevelBorder.RAISED));
+        btnCobroCita.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
+        btnCobroCita.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnCobroCitaActionPerformed(evt);
+            }
+        });
+        jPanel1.add(btnCobroCita, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 160, 210, -1));
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(jPanel1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+            .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, 259, javax.swing.GroupLayout.PREFERRED_SIZE)
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(layout.createSequentialGroup()
-                .addComponent(jPanel1, javax.swing.GroupLayout.DEFAULT_SIZE, 274, Short.MAX_VALUE)
-                .addContainerGap())
+            .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, 212, javax.swing.GroupLayout.PREFERRED_SIZE)
         );
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
-    private void AdminCitasUsuariosActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_AdminCitasUsuariosActionPerformed
-        
-    }//GEN-LAST:event_AdminCitasUsuariosActionPerformed
+    private void btnCitasActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnCitasActionPerformed
+        GestionarCitas citas = new GestionarCitas();
+        citas.setIdUsuario(idUsuario);
+        citas.setVisible(true);
+        citas.setFlag(true);
+        this.dispose();
+    }//GEN-LAST:event_btnCitasActionPerformed
 
     private void VolverActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_VolverActionPerformed
         // Cuando se presiona el botón de volver, se cierra la ventana actual y se abre la ventana de login
@@ -114,10 +129,23 @@ public class MenuAdministracion extends javax.swing.JFrame {
         
     }//GEN-LAST:event_VolverActionPerformed
 
+    private void btnExpedienteActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnExpedienteActionPerformed
+        GestionExpedientesV exp = new GestionExpedientesV();
+        exp.setIdUsuario(idUsuario);
+        exp.setPermiso(false);
+        exp.setVisible(true);
+        this.dispose();
+            
+    }//GEN-LAST:event_btnExpedienteActionPerformed
+
+    private void btnCobroCitaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnCobroCitaActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_btnCobroCitaActionPerformed
+
     private void GestionarUsuariosActionPerformed(java.awt.event.ActionEvent evt) {                                                  
-        // Se crea una instancia de la ventana de gestión de usuarios y se muestra en pantalla
-        GestionarUsuariosA gestionUsuarios = new GestionarUsuariosA();
-        gestionUsuarios.setVisible(true);
+        GestionClientes cliente = new GestionClientes();
+        cliente.setIdUsuario(idUsuario);
+        cliente.setVisible(true);
         this.dispose();
 
     }
@@ -155,12 +183,12 @@ public class MenuAdministracion extends javax.swing.JFrame {
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private javax.swing.JButton AdminCitasUsuarios;
-    private javax.swing.JButton AsignaciónCitas;
-    private javax.swing.JButton GestionarProductos;
     private javax.swing.JButton GestionarUsuarios;
     private javax.swing.JLabel Titulo;
     private javax.swing.JButton Volver;
+    private javax.swing.JButton btnCitas;
+    private javax.swing.JButton btnCobroCita;
+    private javax.swing.JButton btnExpediente;
     private javax.swing.JPanel jPanel1;
     private javax.swing.JPanel jPanel2;
     // End of variables declaration//GEN-END:variables

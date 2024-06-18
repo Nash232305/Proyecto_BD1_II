@@ -6,18 +6,16 @@ import java.awt.*;
 import java.util.ArrayList;
 import javax.swing.*;
 
-public class Venta_Articulos extends javax.swing.JFrame {
-    
+public class Agregar_Detalle_Cita extends javax.swing.JFrame {
+    int cita;
     int sesion,idUsuario;
     ArrayList<ItemVenta> articulos = new ArrayList<>();
-    public Venta_Articulos() {
+    public Agregar_Detalle_Cita() {
         initComponents();
         this.setTitle("Venta de Articulos");
         this.setResizable(false);
         this.setLocationRelativeTo(null);
-        txfTotal.setEditable(false);
         lstCarrito.setModel(new DefaultListModel<>());
-        
         refrescarLista();
     }
 
@@ -28,7 +26,10 @@ public class Venta_Articulos extends javax.swing.JFrame {
     public void setIdUsuario(int idUsuario) {
         this.idUsuario = idUsuario;
     }
-    
+
+    public void setCita(int cita) {
+        this.cita = cita;
+    }
     
 
     public int getSesion() {
@@ -40,7 +41,7 @@ public class Venta_Articulos extends javax.swing.JFrame {
     }
     
     public void refrescarLista(){
-        Modelo.VentaAccess.getInventario(lstArticulos);
+        Modelo.VeterinarioAccess.getPYS(lstPYS);
     }
     
     @SuppressWarnings("unchecked")
@@ -53,12 +54,15 @@ public class Venta_Articulos extends javax.swing.JFrame {
         btnCerrarSesion = new javax.swing.JButton();
         jScrollPane1 = new javax.swing.JScrollPane();
         lstCarrito = new javax.swing.JList<>();
-        txfTotal = new javax.swing.JTextField();
         jScrollPane2 = new javax.swing.JScrollPane();
-        lstArticulos = new javax.swing.JList<>();
-        btnComprar = new javax.swing.JButton();
+        lstPYS = new javax.swing.JList<>();
+        btnGuardar = new javax.swing.JButton();
         txfBuscarArt = new javax.swing.JTextField();
         btnVaciar = new javax.swing.JButton();
+        lblTittleLogin = new javax.swing.JLabel();
+        lblTittleLogin1 = new javax.swing.JLabel();
+        jScrollPane3 = new javax.swing.JScrollPane();
+        txaObservaciones = new javax.swing.JTextArea();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
@@ -71,9 +75,9 @@ public class Venta_Articulos extends javax.swing.JFrame {
 
         lblGestionProve.setFont(new java.awt.Font("Segoe UI", 0, 36)); // NOI18N
         lblGestionProve.setForeground(new java.awt.Color(0, 0, 0));
-        lblGestionProve.setText("Venta de Artículos");
+        lblGestionProve.setText("Detalle de la Cita");
         pnlSuperior.add(lblGestionProve);
-        lblGestionProve.setBounds(330, 30, 300, 50);
+        lblGestionProve.setBounds(350, 30, 300, 50);
 
         btnCerrarSesion.setBackground(new java.awt.Color(176, 33, 33));
         btnCerrarSesion.setFont(new java.awt.Font("Segoe UI", 0, 18)); // NOI18N
@@ -111,54 +115,42 @@ public class Venta_Articulos extends javax.swing.JFrame {
         jScrollPane1.setViewportView(lstCarrito);
 
         pnlBackProve.add(jScrollPane1);
-        jScrollPane1.setBounds(710, 140, 280, 390);
-
-        txfTotal.setBackground(new java.awt.Color(255, 255, 255));
-        txfTotal.setFont(new java.awt.Font("Segoe UI", 0, 18)); // NOI18N
-        txfTotal.setForeground(new java.awt.Color(0, 0, 0));
-        txfTotal.setText("Total: 0");
-        txfTotal.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                txfTotalActionPerformed(evt);
-            }
-        });
-        pnlBackProve.add(txfTotal);
-        txfTotal.setBounds(710, 545, 270, 40);
+        jScrollPane1.setBounds(710, 130, 280, 450);
 
         jScrollPane2.setForeground(new java.awt.Color(0, 0, 0));
 
-        lstArticulos.setBackground(new java.awt.Color(255, 255, 255));
-        lstArticulos.setBorder(new javax.swing.border.SoftBevelBorder(javax.swing.border.BevelBorder.RAISED, null, java.awt.Color.orange, null, null));
-        lstArticulos.setFont(new java.awt.Font("Segoe UI", 0, 18)); // NOI18N
-        lstArticulos.setForeground(new java.awt.Color(0, 0, 0));
-        lstArticulos.setModel(new javax.swing.AbstractListModel<String>() {
+        lstPYS.setBackground(new java.awt.Color(255, 255, 255));
+        lstPYS.setBorder(new javax.swing.border.SoftBevelBorder(javax.swing.border.BevelBorder.RAISED, null, java.awt.Color.orange, null, null));
+        lstPYS.setFont(new java.awt.Font("Segoe UI", 0, 18)); // NOI18N
+        lstPYS.setForeground(new java.awt.Color(0, 0, 0));
+        lstPYS.setModel(new javax.swing.AbstractListModel<String>() {
             String[] strings = { "Item 1", "Item 2", "Item 3", "Item 4", "Item 5", "1", "2", "3", "4", "5", "6", "7", "8", "9", "0", "1", "2", "3", "4", "5", "6", " " };
             public int getSize() { return strings.length; }
             public String getElementAt(int i) { return strings[i]; }
         });
-        lstArticulos.setSelectionBackground(new java.awt.Color(204, 204, 204));
-        lstArticulos.setSelectionForeground(new java.awt.Color(176, 33, 33));
-        lstArticulos.addMouseListener(new java.awt.event.MouseAdapter() {
+        lstPYS.setSelectionBackground(new java.awt.Color(204, 204, 204));
+        lstPYS.setSelectionForeground(new java.awt.Color(176, 33, 33));
+        lstPYS.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseClicked(java.awt.event.MouseEvent evt) {
-                lstArticulosMouseClicked(evt);
+                lstPYSMouseClicked(evt);
             }
         });
-        jScrollPane2.setViewportView(lstArticulos);
+        jScrollPane2.setViewportView(lstPYS);
 
         pnlBackProve.add(jScrollPane2);
-        jScrollPane2.setBounds(20, 200, 670, 440);
+        jScrollPane2.setBounds(20, 200, 670, 180);
 
-        btnComprar.setBackground(new java.awt.Color(176, 33, 33));
-        btnComprar.setFont(new java.awt.Font("Segoe UI", 0, 18)); // NOI18N
-        btnComprar.setForeground(new java.awt.Color(255, 255, 255));
-        btnComprar.setText("Comprar");
-        btnComprar.addActionListener(new java.awt.event.ActionListener() {
+        btnGuardar.setBackground(new java.awt.Color(176, 33, 33));
+        btnGuardar.setFont(new java.awt.Font("Segoe UI", 0, 18)); // NOI18N
+        btnGuardar.setForeground(new java.awt.Color(255, 255, 255));
+        btnGuardar.setText("Guardar");
+        btnGuardar.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                btnComprarActionPerformed(evt);
+                btnGuardarActionPerformed(evt);
             }
         });
-        pnlBackProve.add(btnComprar);
-        btnComprar.setBounds(860, 600, 110, 40);
+        pnlBackProve.add(btnGuardar);
+        btnGuardar.setBounds(850, 600, 110, 40);
 
         txfBuscarArt.setBackground(new java.awt.Color(255, 255, 255));
         txfBuscarArt.setFont(new java.awt.Font("Segoe UI", 0, 18)); // NOI18N
@@ -188,6 +180,26 @@ public class Venta_Articulos extends javax.swing.JFrame {
         pnlBackProve.add(btnVaciar);
         btnVaciar.setBounds(730, 600, 110, 40);
 
+        lblTittleLogin.setFont(new java.awt.Font("Dialog", 0, 24)); // NOI18N
+        lblTittleLogin.setForeground(new java.awt.Color(0, 0, 0));
+        lblTittleLogin.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+        pnlBackProve.add(lblTittleLogin);
+        lblTittleLogin.setBounds(700, 120, 300, 60);
+
+        lblTittleLogin1.setFont(new java.awt.Font("Dialog", 0, 24)); // NOI18N
+        lblTittleLogin1.setForeground(new java.awt.Color(0, 0, 0));
+        lblTittleLogin1.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+        lblTittleLogin1.setText("Observaciones");
+        pnlBackProve.add(lblTittleLogin1);
+        lblTittleLogin1.setBounds(20, 380, 180, 60);
+
+        txaObservaciones.setColumns(20);
+        txaObservaciones.setRows(5);
+        jScrollPane3.setViewportView(txaObservaciones);
+
+        pnlBackProve.add(jScrollPane3);
+        jScrollPane3.setBounds(20, 440, 670, 200);
+
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
@@ -202,38 +214,60 @@ public class Venta_Articulos extends javax.swing.JFrame {
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
-    private void txfTotalActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txfTotalActionPerformed
-        
-    }//GEN-LAST:event_txfTotalActionPerformed
-
     private void btnCerrarSesionActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnCerrarSesionActionPerformed
         this.dispose();
-        MenuCliente cliente = new MenuCliente();
-        cliente.setVisible(true);
-        cliente.setSesion(this.sesion);
+        GestionCitasV gestion = new GestionCitasV();
+        gestion.setVisible(true);
+        gestion.setIdUsuario(idUsuario);
     }//GEN-LAST:event_btnCerrarSesionActionPerformed
 
-    private void btnComprarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnComprarActionPerformed
+    private void ingresarLineasDetalleCita(){
+        int acum = 0;
+        if (!txaObservaciones.getText().equals("") && txaObservaciones.getText().length()<=500){
+            for (int i = 0; i < articulos.size(); i++) {
+                ItemVenta art = articulos.get(i);
+                acum += Modelo.VeterinarioAccess.agregarDetalleCita(cita,art.getCodigo(),art.getCant());
+            }
+            acum+=Modelo.VeterinarioAccess.agregarObservaciones(txaObservaciones.getText(), cita);
+            if (acum != 0 && acum==articulos.size()+1){
+                
+                int respuesta = JOptionPane.showConfirmDialog(null, "Cita completada con éxito ¿Quieres asginar próxima cita?", "Confirmar", JOptionPane.YES_NO_OPTION);
+                
+                if (respuesta == JOptionPane.YES_OPTION) {
+                    this.dispose();
+                    Asignar_Prox_Cita nueva = new Asignar_Prox_Cita();
+                    nueva.setVisible(true);
+                    nueva.setDoc(idUsuario);
+                    nueva.setPet(Modelo.VeterinarioAccess.getMascotaCodCita(cita));
+                }else if (respuesta == JOptionPane.NO_OPTION) {
+                    this.dispose();
+                    GestionCitasV gestion = new GestionCitasV();
+                    gestion.setVisible(true);
+                    gestion.setIdUsuario(idUsuario);
+                }
+                
+            }
+        }
+    }
+    
+    
+    private void btnGuardarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnGuardarActionPerformed
         if (articulos.size() > 0){
-            Informacion_Pago pago = new Informacion_Pago();
-            pago.setVisible(true);
-            pago.setArticulos(articulos);
-            pago.setIdUsuario(idUsuario);
+            ingresarLineasDetalleCita();
             this.dispose();
         }else
             JOptionPane.showMessageDialog(null,"Tu carrito está vacío.","Error",JOptionPane.ERROR_MESSAGE);
-    }//GEN-LAST:event_btnComprarActionPerformed
+    }//GEN-LAST:event_btnGuardarActionPerformed
 
     private void txfBuscarArtActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txfBuscarArtActionPerformed
         
     }//GEN-LAST:event_txfBuscarArtActionPerformed
 
-    private void lstArticulosMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_lstArticulosMouseClicked
+    private void lstPYSMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_lstPYSMouseClicked
         if (evt.getClickCount() == 2) {
-            int index = lstArticulos.locationToIndex(evt.getPoint());
+            int index = lstPYS.locationToIndex(evt.getPoint());
             if (index != -1) {
-                String selectedCod = lstArticulos.getModel().getElementAt(index).substring(5, lstArticulos.getModel().getElementAt(index).length());
-                selectedCod = selectedCod.substring(0,selectedCod.indexOf(" "));
+                String selectedCod = lstPYS.getModel().getElementAt(index).substring(0, lstPYS.getModel().getElementAt(index).indexOf(" "));
                 int cod = Integer.parseInt(selectedCod);
                 String precio = Modelo.VentaAccess.getPrecioPorCod(cod);
                 String desc = Modelo.VentaAccess.getDescripcionPorCod(cod);
@@ -241,7 +275,7 @@ public class Venta_Articulos extends javax.swing.JFrame {
                 actualizarCarrito();
             }
         }
-    }//GEN-LAST:event_lstArticulosMouseClicked
+    }//GEN-LAST:event_lstPYSMouseClicked
 
     public void actualizarCarrito(){
         String aux = "";
@@ -251,18 +285,10 @@ public class Venta_Articulos extends javax.swing.JFrame {
             ItemVenta art = articulos.get(i);
             aux = art.getCodigo() + "- " + art.getDescripcion() + " (" + art.getCant() + ")";
             model.addElement(aux);
-            actualizarMonto();
         }
     }
     
-    public void actualizarMonto(){
-        int sum = 0;
-        for (int i = 0; i < articulos.size(); i++) {
-            ItemVenta art = articulos.get(i);
-            sum += art.getCant() * art.getPrecio();
-        }
-        txfTotal.setText("Total: " + sum);
-    } 
+    
     
     private void agregarArticulo(int cod ,String desc,String precio){
         boolean flag = false;
@@ -286,13 +312,12 @@ public class Venta_Articulos extends javax.swing.JFrame {
     
     
     private void txfBuscarArtKeyReleased(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txfBuscarArtKeyReleased
-        Modelo.ReseñasAccess.buscarArticulo(txfBuscarArt.getText(), lstArticulos);
+        Modelo.VeterinarioAccess.buscarPYS(txfBuscarArt.getText(), lstPYS);
     }//GEN-LAST:event_txfBuscarArtKeyReleased
 
     private void btnVaciarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnVaciarActionPerformed
         articulos.clear();
         actualizarCarrito();
-        actualizarMonto();
     }//GEN-LAST:event_btnVaciarActionPerformed
     
     public void cambiarImagen(JLabel lbl, String imagePath, int width, int height) {
@@ -320,33 +345,36 @@ public class Venta_Articulos extends javax.swing.JFrame {
                 }
             }
         } catch (ClassNotFoundException ex) {
-            java.util.logging.Logger.getLogger(Venta_Articulos.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(Agregar_Detalle_Cita.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         } catch (InstantiationException ex) {
-            java.util.logging.Logger.getLogger(Venta_Articulos.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(Agregar_Detalle_Cita.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         } catch (IllegalAccessException ex) {
-            java.util.logging.Logger.getLogger(Venta_Articulos.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(Agregar_Detalle_Cita.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         } catch (javax.swing.UnsupportedLookAndFeelException ex) {
-            java.util.logging.Logger.getLogger(Venta_Articulos.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(Agregar_Detalle_Cita.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         }
         java.awt.EventQueue.invokeLater(new Runnable() {
             public void run() {
-                new Venta_Articulos().setVisible(true);
+                new Agregar_Detalle_Cita().setVisible(true);
             }
         });
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton btnCerrarSesion;
-    private javax.swing.JButton btnComprar;
+    private javax.swing.JButton btnGuardar;
     private javax.swing.JButton btnVaciar;
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JScrollPane jScrollPane2;
+    private javax.swing.JScrollPane jScrollPane3;
     private javax.swing.JLabel lblGestionProve;
-    private javax.swing.JList<String> lstArticulos;
+    private javax.swing.JLabel lblTittleLogin;
+    private javax.swing.JLabel lblTittleLogin1;
     private javax.swing.JList<String> lstCarrito;
+    private javax.swing.JList<String> lstPYS;
     private javax.swing.JPanel pnlBackProve;
     private javax.swing.JPanel pnlSuperior;
+    private javax.swing.JTextArea txaObservaciones;
     private javax.swing.JTextField txfBuscarArt;
-    private javax.swing.JTextField txfTotal;
     // End of variables declaration//GEN-END:variables
 }

@@ -62,7 +62,7 @@ public class Editar_Mascota extends javax.swing.JFrame {
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         getContentPane().setLayout(null);
 
-        pnlBackgroundAA.setBackground(new java.awt.Color(255, 120, 120));
+        pnlBackgroundAA.setBackground(new java.awt.Color(255, 255, 255));
         pnlBackgroundAA.setLayout(null);
 
         pnlAgregarArticulo.setBackground(new java.awt.Color(219, 210, 210));

@@ -83,11 +83,28 @@ public class CitasAccess {
             ResultSet resultSet = statement.executeQuery();
 
             while (resultSet.next())
-                info.add("Exp: " + resultSet.getInt(1)+ " - " + resultSet.getString(2));
+                info.add("Exp: " + resultSet.getInt(1)+ " - " + resultSet.getString(2) + "  Dueño: " + resultSet.getString(3));
             connection.close();
             return info;
         } catch (SQLException ex) {
             return info;
+        }
+    }
+    
+    public static void getExpedientesPorFiltro(JList lst,String filter){
+        DefaultListModel<String> model = new DefaultListModel<>();
+        lst.setModel(model);
+        try{
+            Connection connection = SQLConnection.getConnection();
+            String sql = "EXEC getExpedientesPorFiltro ?";
+            PreparedStatement statement = connection.prepareStatement(sql);
+            statement.setString(1, filter);  
+            ResultSet resultSet = statement.executeQuery();
+            while(resultSet.next())
+                model.addElement("Exp: " + resultSet.getInt(1)+ " - " + resultSet.getString(2) + "  Dueño: " + resultSet.getString(3));
+            connection.close();
+        } catch (SQLException ex) {
+            System.out.println("Error sql: " + ex);
         }
     }
     
@@ -128,6 +145,7 @@ public class CitasAccess {
             return 0;
         }
     }
+    
      public static int cancelarCitaCod(int cod){
         try{
             Connection connection = SQLConnection.getConnection();
@@ -230,5 +248,31 @@ public class CitasAccess {
         }
     }
     
+   public static void getCitasPorDoctor(int idUsuario,JList<String> lst){
+        String str = "";
+        DefaultListModel<String> model = new DefaultListModel<>();
+        lst.setModel(model);
+        try{
+            Connection connection = SQLConnection.getConnection();
+            String selectSql = "EXEC getCitasPorDoctor ?";
+            System.out.println("negros de m: " + idUsuario);
+            PreparedStatement statement = connection.prepareStatement(selectSql);
+            statement.setInt(1, idUsuario);
+            ResultSet resultSet = statement.executeQuery();
+            while (resultSet.next()){
+                str += 
+                        "Cód: " + resultSet.getInt(1)+ 
+                        "   Fecha: " + resultSet.getString(2)+
+                        "   Mascota: " + resultSet.getString(3);
+                model.addElement(str);
+                System.out.println("Pene gordo alfredo: " + str);
+                str= "";
+            }
+            connection.close();
+        } catch (SQLException ex) {
+            ex.printStackTrace();
+        }
+    }
    
+    
 }

@@ -3,12 +3,25 @@ package Vista;
 import java.util.ArrayList;
 
 public class GestionarCitas extends javax.swing.JFrame {
-
+    
+    int idUsuario;
+    boolean flag;
     public GestionarCitas() {
         initComponents();
         setLocationRelativeTo(null);
         actualizarCitas();
     }
+
+    public void setIdUsuario(int idUsuario) {
+        this.idUsuario = idUsuario;
+        actualizarCitas();
+    }
+
+    public void setFlag(boolean flag) {
+        this.flag = flag;
+    }
+    
+    
 
     public void actualizarCitas(){
         Modelo.CitasAccess.getCitas(lstCitas);
@@ -84,20 +97,15 @@ public class GestionarCitas extends javax.swing.JFrame {
     }// </editor-fold>//GEN-END:initComponents
 
     private void VolverActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_VolverActionPerformed
-        
-        if (Modelo.LoginAccess.tipoUsuario == 3) {
-            // se crea un objeto de la clase GestionUsuariosG
-            GestionarUsuariosG gestionUsuariosG = new GestionarUsuariosG();
-            // se hace visible la ventana de GestionUsuariosG
-            gestionUsuariosG.setVisible(true);
-            // se cierra la ventana actual
+        if( flag){
+            MenuAdministracion adm = new MenuAdministracion();
+            adm.setIdUsuario(idUsuario);
+            adm.setVisible(true);
             this.dispose();
-        } else if (Modelo.LoginAccess.tipoUsuario == 4) {
-            // se crea un objeto de la clase GestionUsuariosA
-            GestionarUsuariosA gestionUsuariosA = new GestionarUsuariosA();
-            // se hace visible la ventana de GestionUsuariosA
-            gestionUsuariosA.setVisible(true);
-            // se cierra la ventana actual
+        }else{
+            MenuVeterinario vet = new MenuVeterinario();
+            vet.setIdUsuario(idUsuario);
+            vet.setVisible(true);
             this.dispose();
         }
     }//GEN-LAST:event_VolverActionPerformed

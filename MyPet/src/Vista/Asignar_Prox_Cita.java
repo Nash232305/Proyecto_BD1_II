@@ -7,13 +7,13 @@ import java.util.*;
 import javax.swing.*;
 
 
-public class Agregar_Cita extends javax.swing.JFrame {
+public class Asignar_Prox_Cita extends javax.swing.JFrame {
 
     ArrayList<String> lstArticulo = new ArrayList<>();
-    
-    public Agregar_Cita() {
+    int doc, pet;
+    public Asignar_Prox_Cita() {
         initComponents();
-        this.setSize(416, 530);
+        this.setSize(416, 360);
         this.setResizable(false);
         this.setLocationRelativeTo(null);
         agregarAnno(cmbAnnoCita);
@@ -26,59 +26,22 @@ public class Agregar_Cita extends javax.swing.JFrame {
             cmb.addItem(String.valueOf(year));
         cmb.setSelectedItem("2024");
     }
+
+    public void setDoc(int doc) {
+        this.doc = doc;
+    }
+
+    public void setPet(int pet) {
+        this.pet = pet;
+    }
     
+   
+
     public ArrayList<String> getLstArticulo() {
         return lstArticulo;
     }
 
-    public void setLstArticulo(ArrayList<String> lstArticulo) {
-        this.lstArticulo = lstArticulo;
-        llenarCampos();
-    }
-    
-    private void llenarCampos(){
-        if (!lstArticulo.isEmpty()){
-            setFecha(lstArticulo.get(0));
-            cmbEstado.setSelectedIndex(Integer.parseInt(lstArticulo.get(1)));
-        }
-    }
-    public void setMascotas(ArrayList<String> mascotas){
-        for (int i = 0; i < mascotas.size(); i++) 
-            cmbMascotas.addItem(mascotas.get(i));
-    }
-    
-    public void setDoctores(ArrayList<String> doctores){
-        for (int i = 0; i < doctores.size(); i++) 
-            cmbDoctores.addItem(doctores.get(i));
-    }
-    
-    public void setFecha(String dateString) {
-        SimpleDateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss.SSS");
-        try {
-            Date date = dateFormat.parse(dateString);
-
-            SimpleDateFormat yearFormat = new SimpleDateFormat("yyyy");
-            SimpleDateFormat monthFormat = new SimpleDateFormat("MM");
-            SimpleDateFormat dayFormat = new SimpleDateFormat("dd");
-            SimpleDateFormat hourFormat = new SimpleDateFormat("HH");
-
-            String year = yearFormat.format(date);
-            String month = monthFormat.format(date);
-            String day = dayFormat.format(date);
-            String hour = hourFormat.format(date);
-            
-            System.out.println("Horaaaaa: " + hour);
-            
-            cmbAnnoCita.setSelectedItem(year);
-            cmbMesCita.setSelectedItem(month);
-            cmbDiaCita.setSelectedItem(day);
-            cmbHoraCita.setSelectedItem(hour.toLowerCase());
-
-        } catch (ParseException e) {
-            e.printStackTrace();
-        }
-    }
-    
+   
     public boolean isInt(String num){
         try{
             Integer.parseInt(num);
@@ -94,12 +57,10 @@ public class Agregar_Cita extends javax.swing.JFrame {
 
         pnlBackgroundEA = new javax.swing.JPanel();
         pnlEditarArticulo = new javax.swing.JPanel();
-        lblCodProv = new javax.swing.JLabel();
         btnSaveAA = new javax.swing.JButton();
         lblTittleEA = new javax.swing.JLabel();
         lblCodRef = new javax.swing.JLabel();
         btnCancelarAA = new javax.swing.JButton();
-        lblCodProv1 = new javax.swing.JLabel();
         cmbHoraCita = new javax.swing.JComboBox<>();
         lblHora = new javax.swing.JLabel();
         lblDiaCita = new javax.swing.JLabel();
@@ -108,10 +69,6 @@ public class Agregar_Cita extends javax.swing.JFrame {
         cmbMesCita = new javax.swing.JComboBox<>();
         lblAnnoCita = new javax.swing.JLabel();
         cmbAnnoCita = new javax.swing.JComboBox<>();
-        cmbEstado = new javax.swing.JComboBox<>();
-        cmbDoctores = new javax.swing.JComboBox<>();
-        lblCodProv2 = new javax.swing.JLabel();
-        cmbMascotas = new javax.swing.JComboBox<>();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         getContentPane().setLayout(null);
@@ -121,12 +78,6 @@ public class Agregar_Cita extends javax.swing.JFrame {
 
         pnlEditarArticulo.setBackground(new java.awt.Color(219, 210, 210));
         pnlEditarArticulo.setLayout(null);
-
-        lblCodProv.setFont(new java.awt.Font("Segoe UI", 0, 18)); // NOI18N
-        lblCodProv.setForeground(new java.awt.Color(0, 0, 0));
-        lblCodProv.setText("Estado");
-        pnlEditarArticulo.add(lblCodProv);
-        lblCodProv.setBounds(30, 290, 250, 25);
 
         btnSaveAA.setBackground(new java.awt.Color(176, 33, 33));
         btnSaveAA.setFont(new java.awt.Font("Segoe UI", 0, 18)); // NOI18N
@@ -138,7 +89,7 @@ public class Agregar_Cita extends javax.swing.JFrame {
             }
         });
         pnlEditarArticulo.add(btnSaveAA);
-        btnSaveAA.setBounds(190, 380, 110, 40);
+        btnSaveAA.setBounds(190, 200, 110, 40);
 
         lblTittleEA.setFont(new java.awt.Font("Dialog", 0, 24)); // NOI18N
         lblTittleEA.setForeground(new java.awt.Color(0, 0, 0));
@@ -163,13 +114,7 @@ public class Agregar_Cita extends javax.swing.JFrame {
             }
         });
         pnlEditarArticulo.add(btnCancelarAA);
-        btnCancelarAA.setBounds(60, 380, 110, 40);
-
-        lblCodProv1.setFont(new java.awt.Font("Segoe UI", 0, 18)); // NOI18N
-        lblCodProv1.setForeground(new java.awt.Color(0, 0, 0));
-        lblCodProv1.setText("Doctor");
-        pnlEditarArticulo.add(lblCodProv1);
-        lblCodProv1.setBounds(30, 170, 250, 25);
+        btnCancelarAA.setBounds(60, 200, 110, 40);
 
         cmbHoraCita.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "08", "09", "10", "11", "12", "13", "14", "15", "16", "17" }));
         cmbHoraCita.addActionListener(new java.awt.event.ActionListener() {
@@ -215,27 +160,11 @@ public class Agregar_Cita extends javax.swing.JFrame {
         pnlEditarArticulo.add(cmbAnnoCita);
         cmbAnnoCita.setBounds(260, 140, 70, 26);
 
-        cmbEstado.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Agendada", "Cancelada", "Completada" }));
-        pnlEditarArticulo.add(cmbEstado);
-        cmbEstado.setBounds(30, 320, 300, 26);
-
-        pnlEditarArticulo.add(cmbDoctores);
-        cmbDoctores.setBounds(30, 200, 300, 26);
-
-        lblCodProv2.setFont(new java.awt.Font("Segoe UI", 0, 18)); // NOI18N
-        lblCodProv2.setForeground(new java.awt.Color(0, 0, 0));
-        lblCodProv2.setText("Mascota");
-        pnlEditarArticulo.add(lblCodProv2);
-        lblCodProv2.setBounds(30, 230, 250, 25);
-
-        pnlEditarArticulo.add(cmbMascotas);
-        cmbMascotas.setBounds(30, 260, 300, 26);
-
         pnlBackgroundEA.add(pnlEditarArticulo);
-        pnlEditarArticulo.setBounds(20, 20, 360, 450);
+        pnlEditarArticulo.setBounds(20, 20, 360, 280);
 
         getContentPane().add(pnlBackgroundEA);
-        pnlBackgroundEA.setBounds(0, 0, 400, 500);
+        pnlBackgroundEA.setBounds(0, 0, 400, 330);
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
@@ -250,18 +179,16 @@ public class Agregar_Cita extends javax.swing.JFrame {
         return (String) cmbAnnoCita.getSelectedItem() +"-"+ (String) cmbMesCita.getSelectedItem() +"-"+ (String) cmbDiaCita.getSelectedItem() + " " + (String)cmbHoraCita.getSelectedItem()+":00:00.000";
     }
    
+    
     private void btnSaveAAActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnSaveAAActionPerformed
         if(Modelo.CitasAccess.comprobarCita(getNewDate()) == -1){
-            String doc = (String)cmbDoctores.getSelectedItem();
-            doc = doc.substring(4,doc.indexOf('-')-1);
-            String pet = (String)cmbMascotas.getSelectedItem();
-            pet = pet.substring(5,pet.indexOf('-')-1);
-            int filas = Modelo.CitasAccess.agregarCita(getNewDate(),Integer.parseInt(pet), Integer.parseInt(doc), cmbEstado.getSelectedIndex()+1);
+            int filas = Modelo.CitasAccess.agregarCita(getNewDate(),pet, doc, 1);
             if (filas != 0){
                 JOptionPane.showMessageDialog(null,"Cita agregada con éxito.","Éxito",JOptionPane.INFORMATION_MESSAGE);
                 this.dispose();
-                GestionarCitas citas = new GestionarCitas();
+                GestionCitasV citas = new GestionCitasV();
                 citas.setVisible(true);
+                citas.setIdUsuario(doc);
             }else{
                 JOptionPane.showMessageDialog(null,"La cita no se pudo agregar.","Error",JOptionPane.ERROR_MESSAGE);
             }
@@ -287,14 +214,78 @@ public class Agregar_Cita extends javax.swing.JFrame {
                 }
             }
         } catch (ClassNotFoundException ex) {
-            java.util.logging.Logger.getLogger(Agregar_Cita.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(Asignar_Prox_Cita.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         } catch (InstantiationException ex) {
-            java.util.logging.Logger.getLogger(Agregar_Cita.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(Asignar_Prox_Cita.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         } catch (IllegalAccessException ex) {
-            java.util.logging.Logger.getLogger(Agregar_Cita.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(Asignar_Prox_Cita.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         } catch (javax.swing.UnsupportedLookAndFeelException ex) {
-            java.util.logging.Logger.getLogger(Agregar_Cita.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(Asignar_Prox_Cita.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         }
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
         //</editor-fold>
         //</editor-fold>
         //</editor-fold>
@@ -363,7 +354,7 @@ public class Agregar_Cita extends javax.swing.JFrame {
         /* Create and display the form */
         java.awt.EventQueue.invokeLater(new Runnable() {
             public void run() {
-                new Agregar_Cita().setVisible(true);
+                new Asignar_Prox_Cita().setVisible(true);
             }
         });
     }
@@ -373,15 +364,9 @@ public class Agregar_Cita extends javax.swing.JFrame {
     private javax.swing.JButton btnSaveAA;
     private javax.swing.JComboBox<String> cmbAnnoCita;
     private javax.swing.JComboBox<String> cmbDiaCita;
-    private javax.swing.JComboBox<String> cmbDoctores;
-    private javax.swing.JComboBox<String> cmbEstado;
     private javax.swing.JComboBox<String> cmbHoraCita;
-    private javax.swing.JComboBox<String> cmbMascotas;
     private javax.swing.JComboBox<String> cmbMesCita;
     private javax.swing.JLabel lblAnnoCita;
-    private javax.swing.JLabel lblCodProv;
-    private javax.swing.JLabel lblCodProv1;
-    private javax.swing.JLabel lblCodProv2;
     private javax.swing.JLabel lblCodRef;
     private javax.swing.JLabel lblDiaCita;
     private javax.swing.JLabel lblHora;

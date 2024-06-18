@@ -1,24 +1,20 @@
 package Vista;
 
 public class MenuVeterinario extends javax.swing.JFrame {
-    
+    int idUsuario;
     public MenuVeterinario() {
         initComponents();
         setLocationRelativeTo(null);
     }
-
-
-    
     
     @SuppressWarnings("unchecked")
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
         jPanel1 = new javax.swing.JPanel();
-        AsignaciónCitas = new javax.swing.JButton();
-        RCitas = new javax.swing.JButton();
-        GestionarMedicamentos = new javax.swing.JButton();
-        LabelImagen = new javax.swing.JLabel();
+        btnAsignacionCitas = new javax.swing.JButton();
+        btnExpediente = new javax.swing.JButton();
+        btnCita = new javax.swing.JButton();
         jPanel2 = new javax.swing.JPanel();
         Volver = new javax.swing.JButton();
         Titulo = new javax.swing.JLabel();
@@ -30,35 +26,38 @@ public class MenuVeterinario extends javax.swing.JFrame {
         jPanel1.setBackground(new java.awt.Color(153, 255, 255));
         jPanel1.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
-        AsignaciónCitas.setBackground(new java.awt.Color(51, 153, 255));
-        AsignaciónCitas.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Imagenes/ventas.png"))); // NOI18N
-        AsignaciónCitas.setText("Asignaciones de citas");
-        AsignaciónCitas.setBorder(new javax.swing.border.SoftBevelBorder(javax.swing.border.BevelBorder.RAISED));
-        AsignaciónCitas.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
-        jPanel1.add(AsignaciónCitas, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 160, 210, -1));
-
-        RCitas.setBackground(new java.awt.Color(51, 153, 255));
-        RCitas.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Imagenes/calendario (1).png"))); // NOI18N
-        RCitas.setText("Registrar citas");
-        RCitas.setBorder(new javax.swing.border.SoftBevelBorder(javax.swing.border.BevelBorder.RAISED));
-        RCitas.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
-        RCitas.addActionListener(new java.awt.event.ActionListener() {
+        btnAsignacionCitas.setBackground(new java.awt.Color(51, 153, 255));
+        btnAsignacionCitas.setText("Asignaciones de citas");
+        btnAsignacionCitas.setBorder(new javax.swing.border.SoftBevelBorder(javax.swing.border.BevelBorder.RAISED));
+        btnAsignacionCitas.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
+        btnAsignacionCitas.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                RCitasActionPerformed(evt);
+                btnAsignacionCitasActionPerformed(evt);
             }
         });
-        jPanel1.add(RCitas, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 110, 210, -1));
+        jPanel1.add(btnAsignacionCitas, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 110, 210, -1));
 
-        GestionarMedicamentos.setBackground(new java.awt.Color(51, 153, 255));
-        GestionarMedicamentos.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Imagenes/medicina.png"))); // NOI18N
-        GestionarMedicamentos.setText("Gestionar medicamentos");
-        GestionarMedicamentos.setBorder(new javax.swing.border.SoftBevelBorder(javax.swing.border.BevelBorder.RAISED));
-        GestionarMedicamentos.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
-        jPanel1.add(GestionarMedicamentos, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 210, 210, -1));
+        btnExpediente.setBackground(new java.awt.Color(51, 153, 255));
+        btnExpediente.setText("Expedientes");
+        btnExpediente.setBorder(new javax.swing.border.SoftBevelBorder(javax.swing.border.BevelBorder.RAISED));
+        btnExpediente.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
+        btnExpediente.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnExpedienteActionPerformed(evt);
+            }
+        });
+        jPanel1.add(btnExpediente, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 70, 210, -1));
 
-        LabelImagen.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
-        LabelImagen.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Imagenes/logo (1).png"))); // NOI18N
-        jPanel1.add(LabelImagen, new org.netbeans.lib.awtextra.AbsoluteConstraints(260, 90, 200, 170));
+        btnCita.setBackground(new java.awt.Color(51, 153, 255));
+        btnCita.setText("Citas");
+        btnCita.setBorder(new javax.swing.border.SoftBevelBorder(javax.swing.border.BevelBorder.RAISED));
+        btnCita.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
+        btnCita.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnCitaActionPerformed(evt);
+            }
+        });
+        jPanel1.add(btnCita, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 150, 210, -1));
 
         jPanel2.setBackground(new java.awt.Color(153, 255, 255));
         jPanel2.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
@@ -72,12 +71,12 @@ public class MenuVeterinario extends javax.swing.JFrame {
                 VolverActionPerformed(evt);
             }
         });
-        jPanel2.add(Volver, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 70, 60));
+        jPanel2.add(Volver, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 40, 60));
 
         Titulo.setFont(new java.awt.Font("Segoe UI", 1, 18)); // NOI18N
         Titulo.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         Titulo.setText("Menu Veterinario");
-        jPanel2.add(Titulo, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 470, 60));
+        jPanel2.add(Titulo, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 270, 60));
 
         jPanel1.add(jPanel2, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 410, 60));
 
@@ -85,25 +84,50 @@ public class MenuVeterinario extends javax.swing.JFrame {
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(jPanel1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+            .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, 275, javax.swing.GroupLayout.PREFERRED_SIZE)
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(jPanel1, javax.swing.GroupLayout.DEFAULT_SIZE, 300, Short.MAX_VALUE)
+            .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, 220, javax.swing.GroupLayout.PREFERRED_SIZE)
         );
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
-    private void RCitasActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_RCitasActionPerformed
-        
-    }//GEN-LAST:event_RCitasActionPerformed
+    private void btnExpedienteActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnExpedienteActionPerformed
+        GestionExpedientesV exp = new GestionExpedientesV();
+        exp.setIdUsuario(idUsuario);
+        exp.setVisible(true);
+        exp.setPermiso(true);
+        this.dispose();
+    }//GEN-LAST:event_btnExpedienteActionPerformed
 
     private void VolverActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_VolverActionPerformed
         Login login = new Login();
         login.setVisible(true);
         this.dispose();
     }//GEN-LAST:event_VolverActionPerformed
+
+    public void setIdUsuario(int usuario) {
+        this.idUsuario = usuario;
+    }
+
+    
+    
+    private void btnCitaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnCitaActionPerformed
+        this.dispose();
+        GestionCitasV citas = new GestionCitasV();
+        citas.setVisible(true);
+        citas.setIdUsuario(idUsuario);
+    }//GEN-LAST:event_btnCitaActionPerformed
+
+    private void btnAsignacionCitasActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnAsignacionCitasActionPerformed
+        GestionarCitas citas = new GestionarCitas();
+        citas.setIdUsuario(idUsuario);
+        citas.setVisible(true);
+        citas.setFlag(false);
+        this.dispose();
+    }//GEN-LAST:event_btnAsignacionCitasActionPerformed
 
     public static void main(String args[]) {
         /* Set the Nimbus look and feel */
@@ -138,12 +162,11 @@ public class MenuVeterinario extends javax.swing.JFrame {
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private javax.swing.JButton AsignaciónCitas;
-    private javax.swing.JButton GestionarMedicamentos;
-    private javax.swing.JLabel LabelImagen;
-    private javax.swing.JButton RCitas;
     private javax.swing.JLabel Titulo;
     private javax.swing.JButton Volver;
+    private javax.swing.JButton btnAsignacionCitas;
+    private javax.swing.JButton btnCita;
+    private javax.swing.JButton btnExpediente;
     private javax.swing.JPanel jPanel1;
     private javax.swing.JPanel jPanel2;
     // End of variables declaration//GEN-END:variables

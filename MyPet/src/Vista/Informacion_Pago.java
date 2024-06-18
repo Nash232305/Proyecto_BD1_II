@@ -296,13 +296,13 @@ public class Informacion_Pago extends javax.swing.JFrame {
     }//GEN-LAST:event_btnCancelarIPActionPerformed
 
     private void btnSaveIPActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnSaveIPActionPerformed
-        if (getTipo() == 10 &&   validarEntradasContrapedido()){
+        if (getTipo() == 10 && validarEntradasContrapedido()){
             int filas = Modelo.VentaAccess.agregarPedido(idUsuario,txtNombre.getText(), txtDirecc.getText());
             int lastPed = Modelo.VentaAccess.getUltimoPedido();
             int acum = 0;
             for (int i = 0; i < articulos.size(); i++) {
                 ItemVenta art = articulos.get(i);
-                acum += Modelo.VentaAccess.agregarDetallePedido(lastPed, art.getCodigo(),art.getCant());
+                acum += Modelo.VentaAccess.agregarDetallePedido(lastPed,art.getCodigo(),art.getCant());
             }
             Modelo.VentaAccess.actualizarEncabezado(lastPed);
             if (filas != 0 && acum == articulos.size()){

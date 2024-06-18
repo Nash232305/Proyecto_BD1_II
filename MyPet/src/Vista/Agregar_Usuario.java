@@ -32,7 +32,7 @@ public class Agregar_Usuario extends javax.swing.JFrame {
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         getContentPane().setLayout(null);
 
-        pnlBackgroundAA.setBackground(new java.awt.Color(255, 120, 120));
+        pnlBackgroundAA.setBackground(new java.awt.Color(255, 255, 255));
         pnlBackgroundAA.setLayout(null);
 
         pnlAgregarArticulo.setBackground(new java.awt.Color(219, 210, 210));
@@ -114,7 +114,7 @@ public class Agregar_Usuario extends javax.swing.JFrame {
         pnlAgregarArticulo.setBounds(20, 20, 360, 320);
 
         getContentPane().add(pnlBackgroundAA);
-        pnlBackgroundAA.setBounds(0, 0, 400, 470);
+        pnlBackgroundAA.setBounds(0, 0, 400, 360);
 
         pack();
     }// </editor-fold>//GEN-END:initComponents

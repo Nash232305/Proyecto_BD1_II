@@ -1,25 +1,18 @@
 package Vista;
 
-import java.util.ArrayList;
-
-public class GestionClientes extends javax.swing.JFrame {
+public class GestionCitasV extends javax.swing.JFrame {
+    
     int idUsuario;
-    public GestionClientes() {
+    
+    public GestionCitasV() {
         initComponents();
         setLocationRelativeTo(null);
-        actualizarClientes();
     }
 
-    public void setIdUsuario(int idUsuario) {
-        this.idUsuario = idUsuario;
-        actualizarClientes();
+    public void actualizarCitas(){
+        Modelo.CitasAccess.getCitasPorDoctor(idUsuario,lstCitas);
     }
     
-    
-
-    public void actualizarClientes(){
-        Modelo.ClientesAccess.getClientes(lstClientes);
-    }
     @SuppressWarnings("unchecked")
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
@@ -28,8 +21,7 @@ public class GestionClientes extends javax.swing.JFrame {
         Volver = new javax.swing.JButton();
         jLabel1 = new javax.swing.JLabel();
         jScrollPane1 = new javax.swing.JScrollPane();
-        lstClientes = new javax.swing.JList<>();
-        btnAgregar = new javax.swing.JButton();
+        lstCitas = new javax.swing.JList<>();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setResizable(false);
@@ -50,31 +42,23 @@ public class GestionClientes extends javax.swing.JFrame {
 
         jLabel1.setFont(new java.awt.Font("Segoe UI", 1, 24)); // NOI18N
         jLabel1.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
-        jLabel1.setText("Gestión Clientes");
+        jLabel1.setText("Gestión Citas");
         jPanel1.add(jLabel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(170, 10, 280, 40));
 
-        lstClientes.setFont(new java.awt.Font("Segoe UI", 0, 18)); // NOI18N
-        lstClientes.setModel(new javax.swing.AbstractListModel<String>() {
+        lstCitas.setFont(new java.awt.Font("Segoe UI", 0, 18)); // NOI18N
+        lstCitas.setModel(new javax.swing.AbstractListModel<String>() {
             String[] strings = { "Item 1", "Item 2", "Item 3", "Item 4", "Item 5" };
             public int getSize() { return strings.length; }
             public String getElementAt(int i) { return strings[i]; }
         });
-        lstClientes.addMouseListener(new java.awt.event.MouseAdapter() {
+        lstCitas.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseClicked(java.awt.event.MouseEvent evt) {
-                lstClientesMouseClicked(evt);
+                lstCitasMouseClicked(evt);
             }
         });
-        jScrollPane1.setViewportView(lstClientes);
+        jScrollPane1.setViewportView(lstCitas);
 
         jPanel1.add(jScrollPane1, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 130, 570, 370));
-
-        btnAgregar.setText("Agregar");
-        btnAgregar.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                btnAgregarActionPerformed(evt);
-            }
-        });
-        jPanel1.add(btnAgregar, new org.netbeans.lib.awtextra.AbsoluteConstraints(490, 70, 90, 40));
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
@@ -90,34 +74,32 @@ public class GestionClientes extends javax.swing.JFrame {
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
+    public void setIdUsuario(int idUsuario) {
+        this.idUsuario = idUsuario;
+        actualizarCitas();
+    }
+    
+    
     private void VolverActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_VolverActionPerformed
-        MenuAdministracion adm = new MenuAdministracion();
-        adm.setIdUsuario(idUsuario);
-        adm.setVisible(true);
+        MenuVeterinario vet = new MenuVeterinario();
+        vet.setIdUsuario(idUsuario);
+        vet.setVisible(true);
         this.dispose();
     }//GEN-LAST:event_VolverActionPerformed
 
-    private void btnAgregarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnAgregarActionPerformed
-        this.dispose();
-        Agregar_Usuario agregar = new Agregar_Usuario();
-        agregar.setVisible(true);
-    }//GEN-LAST:event_btnAgregarActionPerformed
-
-    private void lstClientesMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_lstClientesMouseClicked
-        if ( evt.getClickCount() == 2 ){
-            String str = lstClientes.getSelectedValue().substring(5,lstClientes.getSelectedValue().length() );
+    private void lstCitasMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_lstCitasMouseClicked
+        if (evt.getClickCount() == 2 ){
+            String str = lstCitas.getSelectedValue().substring(5,lstCitas.getSelectedValue().length() );
             str = str.substring(0, str.indexOf(" "));
-            ArrayList<String> info = new ArrayList<>();
-            info.add(Modelo.ClientesAccess.getNombreClientePorCod(Integer.parseInt(str)));
-            info.add(Modelo.ClientesAccess.getCorreoClientePorCod(Integer.parseInt(str)));
-            info.add(Modelo.ClientesAccess.getPassClientePorCod(Integer.parseInt(str)));
-            Editar_Usuario editar = new Editar_Usuario();
-            editar.setLstArticulo(info);
-            editar.setCod(Integer.parseInt(str));
+            
+            Agregar_Detalle_Cita detalle = new Agregar_Detalle_Cita();
+            detalle.setCita(Integer.parseInt(str));
+            detalle.setIdUsuario(idUsuario);
             this.dispose();
-            editar.setVisible(true);
+            detalle.setVisible(true);
+            
         }
-    }//GEN-LAST:event_lstClientesMouseClicked
+    }//GEN-LAST:event_lstCitasMouseClicked
 
     
     public static void main(String args[]) {
@@ -134,30 +116,32 @@ public class GestionClientes extends javax.swing.JFrame {
                 }
             }
         } catch (ClassNotFoundException ex) {
-            java.util.logging.Logger.getLogger(GestionClientes.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(GestionCitasV.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         } catch (InstantiationException ex) {
-            java.util.logging.Logger.getLogger(GestionClientes.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(GestionCitasV.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         } catch (IllegalAccessException ex) {
-            java.util.logging.Logger.getLogger(GestionClientes.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(GestionCitasV.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         } catch (javax.swing.UnsupportedLookAndFeelException ex) {
-            java.util.logging.Logger.getLogger(GestionClientes.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(GestionCitasV.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         }
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
         //</editor-fold>
 
         /* Create and display the form */
         java.awt.EventQueue.invokeLater(new Runnable() {
             public void run() {
-                new GestionClientes().setVisible(true);
+                new GestionCitasV().setVisible(true);
             }
         });
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton Volver;
-    private javax.swing.JButton btnAgregar;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JPanel jPanel1;
     private javax.swing.JScrollPane jScrollPane1;
-    private javax.swing.JList<String> lstClientes;
+    private javax.swing.JList<String> lstCitas;
     // End of variables declaration//GEN-END:variables
 }

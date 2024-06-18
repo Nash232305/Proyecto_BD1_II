@@ -135,7 +135,7 @@ public class VentaAccess {
         }
     }
     
-    public static int agregarDetallePedido(int factura,  int producto, int cant){
+    public static int agregarDetallePedido(int factura, int producto, int cant){
         try{
             Connection connection = SQLConnection.getConnection();
             String sql = "EXEC agregarDetallePedido ?,?,?";

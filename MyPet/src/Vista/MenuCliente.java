@@ -137,10 +137,10 @@ public class MenuCliente extends javax.swing.JFrame {
     }// </editor-fold>//GEN-END:initComponents
 
     private void btnMascotasActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnMascotasActionPerformed
-        GestionMascotasClientes mascotas = new GestionMascotasClientes();
-        mascotas.setIdUsuario(idUsuario);
+        Vista.GestionMascotasClientes masc = new Vista.GestionMascotasClientes();
+        masc.setIdUsuario(idUsuario);
+        masc.setVisible(true);
         this.dispose();
-        mascotas.setVisible(true);
     }//GEN-LAST:event_btnMascotasActionPerformed
 
     private void btnCitaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnCitaActionPerformed
