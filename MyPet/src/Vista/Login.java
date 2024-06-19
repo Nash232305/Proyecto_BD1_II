@@ -1,13 +1,18 @@
 package Vista;
 
+import Controlador.Notificaciones;
 import Controlador.SesionActiva;
 import Modelo.LoginAccess;
 import java.awt.*;
+import java.net.InetAddress;
+import java.net.UnknownHostException;
 import java.util.ArrayList;
+import javax.swing.Timer;
 import javax.swing.JOptionPane;
 
 public class Login extends javax.swing.JFrame {
-    
+    int unsuccesfulAttempts = 0;
+
     public Login() {
         initComponents();
         this.setTitle("Inicio Sesión");
@@ -97,25 +102,63 @@ public class Login extends javax.swing.JFrame {
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
-    
+
     private void btnLoginActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnLoginActionPerformed
-        if(!"".equals(txtUser.getText()) && !"".equals(txtPass.getText()) ){
+        if (!"".equals(txtUser.getText()) && !"".equals(txtPass.getText())) {
             ArrayList<String> info = LoginAccess.verificarUsuario(txtUser.getText(), txtPass.getText());
-            if (info != null && info.size()>0){
+            if (info != null && info.size() > 0) {
                 int tipo = Integer.parseInt(info.get(1));
                 int id = Integer.parseInt(info.get(0));
                 if (tipo == 6)
-                    GuiFactory( tipo, false,id);
+                    GuiFactory(tipo, false, id);
                 else
-                    GuiFactory( tipo, true,id);
-            }else
-                JOptionPane.showMessageDialog(null,"Inicio de sesión incorrecto, inténtelo nuevamente.","Error",JOptionPane.ERROR_MESSAGE);
-                
+                    GuiFactory(tipo, true, id);
+            } else {
+                JOptionPane.showMessageDialog(null, "Inicio de sesión incorrecto, inténtelo nuevamente.", "Error", JOptionPane.ERROR_MESSAGE);
+                unsuccesfulAttempts++;
+            }
+            if (unsuccesfulAttempts == 3) {
+                JOptionPane.showMessageDialog(null, "Ha excedido el número de intentos permitidos, intente denuevo en 10 segundos.", "Error", JOptionPane.ERROR_MESSAGE);
+                setComponentsEnabled(this, false);
+                getIpAndSendEmails();
+                Timer timer = new Timer(10 * 1000, e -> setComponentsEnabled(this, true));
+                timer.setRepeats(false);
+                timer.start();
+            }
         }
-    }//GEN-LAST:event_btnLoginActionPerformed
+    }
+
+    private void setComponentsEnabled(Container container, boolean enabled) {
+        for (Component component : container.getComponents()) {
+            if (component instanceof Container) {
+                setComponentsEnabled((Container) component, enabled);
+            }
+            if (component instanceof javax.swing.JTextField) {
+                ((javax.swing.JTextField) component).setText("");
+            }
+            if (component instanceof javax.swing.JPasswordField) {
+                ((javax.swing.JPasswordField) component).setText("");
+            }
+            component.setEnabled(enabled);
+        }
+    }
+
+    private void getIpAndSendEmails(){
+        InetAddress ip = null;
+        try{
+            ip = InetAddress.getLocalHost();
+            System.out.println("Tu IP es: " + ip.getHostAddress());
+        } catch (UnknownHostException e) {
+             e.printStackTrace();
+        }
+        Notificaciones.sendEmail("Han ocurrido 3 intentos fallidos de inicio de sesión en la aplicación MyPet desde la ip " + ip.getHostAddress() +
+                ", por favor verifique que no haya un intento de acceso no autorizado.");
+    }
+
 
     private void jLabel1MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jLabel1MouseClicked
         GuiFactory(2,false,9);
+        System.out.println("Continuar sin sesión");
     }//GEN-LAST:event_jLabel1MouseClicked
     
     private void GuiFactory(int tipoUsuario,boolean flag,int idUsuario){
@@ -155,8 +198,6 @@ public class Login extends javax.swing.JFrame {
     }
     
     public static void main(String args[]) {
-        /* alfredo + nashe = amor limonica
-         */
         try {
             for (javax.swing.UIManager.LookAndFeelInfo info : javax.swing.UIManager.getInstalledLookAndFeels()) {
                 if ("Nimbus".equals(info.getName())) {
