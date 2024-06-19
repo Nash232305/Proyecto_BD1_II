@@ -1,6 +1,7 @@
 package Vista;
 
 
+import Controlador.SesionActiva;
 import Modelo.ItemVenta;
 import java.awt.*;
 import java.util.ArrayList;
@@ -17,6 +18,7 @@ public class Agregar_Detalle_Cita extends javax.swing.JFrame {
         this.setLocationRelativeTo(null);
         lstCarrito.setModel(new DefaultListModel<>());
         refrescarLista();
+        SesionActiva.getInstance(null).actualizarActividad(this);
     }
 
     public int getIdUsuario() {

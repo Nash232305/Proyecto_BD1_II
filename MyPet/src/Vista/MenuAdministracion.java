@@ -1,5 +1,7 @@
 package Vista;
 
+import Controlador.SesionActiva;
+
 public class MenuAdministracion extends javax.swing.JFrame {
 
     int idUsuario;
@@ -7,6 +9,7 @@ public class MenuAdministracion extends javax.swing.JFrame {
     public MenuAdministracion() {
         initComponents();
         setLocationRelativeTo(null);
+        SesionActiva.getInstance(this).actualizarActividad(this);
     }
 
     public void setIdUsuario(int idUsuario) {

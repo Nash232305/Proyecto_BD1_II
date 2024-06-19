@@ -1,10 +1,13 @@
 package Vista;
 
+import Controlador.SesionActiva;
+
 public class MenuVeterinario extends javax.swing.JFrame {
     int idUsuario;
     public MenuVeterinario() {
         initComponents();
         setLocationRelativeTo(null);
+        SesionActiva.getInstance(this).actualizarActividad(this);
     }
     
     @SuppressWarnings("unchecked")

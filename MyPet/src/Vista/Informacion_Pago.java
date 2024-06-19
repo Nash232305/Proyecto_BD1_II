@@ -1,5 +1,6 @@
 package Vista;
 
+import Controlador.SesionActiva;
 import Modelo.ItemVenta;
 import java.util.ArrayList;
 import javax.swing.JOptionPane;
@@ -17,6 +18,7 @@ public class Informacion_Pago extends javax.swing.JFrame {
         rbtnTarjeta.setSelected(true);
         this.setResizable(false);
         this.setLocationRelativeTo(null);
+        SesionActiva.getInstance(null).actualizarActividad(this);
     }
 
     public int getIdUsuario() {

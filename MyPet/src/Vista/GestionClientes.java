@@ -1,5 +1,7 @@
 package Vista;
 
+import Controlador.SesionActiva;
+
 import java.util.ArrayList;
 
 public class GestionClientes extends javax.swing.JFrame {
@@ -8,6 +10,7 @@ public class GestionClientes extends javax.swing.JFrame {
         initComponents();
         setLocationRelativeTo(null);
         actualizarClientes();
+        SesionActiva.getInstance(null).actualizarActividad(this);
     }
 
     public void setIdUsuario(int idUsuario) {

@@ -1,5 +1,7 @@
 package Vista;
 
+import Controlador.SesionActiva;
+
 import java.util.ArrayList;
 import javax.swing.JComboBox;
 import javax.swing.JOptionPane;
@@ -10,6 +12,7 @@ public class GestionUsuariosAdmin extends javax.swing.JFrame {
         initComponents();
         setLocationRelativeTo(null);
         actualizarClientes();
+        SesionActiva.getInstance(null).actualizarActividad(this);
     }
 
     public void setIdUsuario(int idUsuario) {

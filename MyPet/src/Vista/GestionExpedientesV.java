@@ -1,5 +1,7 @@
 package Vista;
 
+import Controlador.SesionActiva;
+
 import java.util.ArrayList;
 import javax.swing.DefaultListModel;
 import javax.swing.JOptionPane;
@@ -15,6 +17,7 @@ public class GestionExpedientesV extends javax.swing.JFrame {
         txaObservaciones.setVisible(false);
         txaObservaciones.setEditable(false);
         this.setSize(628, 560);
+        SesionActiva.getInstance(null).actualizarActividad(this);
     }
 
     public void actualizarCitas(){

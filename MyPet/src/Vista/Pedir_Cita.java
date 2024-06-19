@@ -1,6 +1,8 @@
 package Vista;
 
 
+import Controlador.SesionActiva;
+
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.*;
@@ -17,6 +19,7 @@ public class Pedir_Cita extends javax.swing.JFrame {
         this.setResizable(false);
         this.setLocationRelativeTo(null);
         agregarAnno(cmbAnnoCita);
+        SesionActiva.getInstance(null).actualizarActividad(this);
     }
 
     public int getIdUsuario() {

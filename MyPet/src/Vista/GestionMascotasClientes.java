@@ -1,5 +1,7 @@
 package Vista;
 
+import Controlador.SesionActiva;
+
 import java.util.ArrayList;
 
 public class GestionMascotasClientes extends javax.swing.JFrame {
@@ -7,6 +9,7 @@ public class GestionMascotasClientes extends javax.swing.JFrame {
     public GestionMascotasClientes() {
         initComponents();
         setLocationRelativeTo(null);
+        SesionActiva.getInstance(null).actualizarActividad(this);
     }
 
     public int getIdUsuario() {

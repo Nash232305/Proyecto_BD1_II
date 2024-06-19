@@ -1,5 +1,6 @@
 package Vista;
 
+import Controlador.SesionActiva;
 import Modelo.LoginAccess;
 import java.awt.*;
 import java.util.ArrayList;

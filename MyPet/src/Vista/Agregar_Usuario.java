@@ -1,5 +1,7 @@
 package Vista;
 
+import Controlador.SesionActiva;
+
 import javax.swing.*;
 
 
@@ -11,6 +13,7 @@ public class Agregar_Usuario extends javax.swing.JFrame {
         this.setSize(416, 400);
         this.setResizable(false);
         this.setLocationRelativeTo(null);
+        SesionActiva.getInstance(null).actualizarActividad(this);
     }
 
     @SuppressWarnings("unchecked")

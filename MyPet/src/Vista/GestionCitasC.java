@@ -1,5 +1,7 @@
 package Vista;
 
+import Controlador.SesionActiva;
+
 import java.util.ArrayList;
 import javax.swing.JOptionPane;
 
@@ -9,6 +11,7 @@ public class GestionCitasC extends javax.swing.JFrame {
     public GestionCitasC() {
         initComponents();
         setLocationRelativeTo(null);
+        SesionActiva.getInstance(null).actualizarActividad(this);
     }
 
     public int getIdUsuario() {

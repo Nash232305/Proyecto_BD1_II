@@ -1,11 +1,14 @@
 package Vista;
 
+import Controlador.SesionActiva;
+
 public class MenuCliente extends javax.swing.JFrame {
 
     int sesion, idUsuario;
     public MenuCliente() {
         initComponents();
         setLocationRelativeTo(null);
+        SesionActiva.getInstance(this).actualizarActividad(this);
     }
 
     public int getIdUsuario() {

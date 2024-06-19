@@ -1,5 +1,7 @@
 package Vista;
 
+import Controlador.SesionActiva;
+
 import java.util.ArrayList;
 import javax.swing.*;
 
@@ -12,6 +14,7 @@ public class Editar_Mascota extends javax.swing.JFrame {
         this.setSize(416, 460);
         this.setResizable(false);
         this.setLocationRelativeTo(null);
+        SesionActiva.getInstance(null).actualizarActividad(this);
     }
 
     public int getIdUsuario() {

@@ -1,5 +1,7 @@
 package Vista;
 
+import Controlador.SesionActiva;
+
 import java.util.*;
 import javax.swing.*;
 
@@ -13,7 +15,7 @@ public class Agregar_Reseña extends javax.swing.JFrame {
         txfArticulo.setEditable(false);
         this.setResizable(false);
         this.setLocationRelativeTo(null);
-        
+        SesionActiva.getInstance(null).actualizarActividad(this);
     }
 
     public Reseñas_Productos getReseñas() {

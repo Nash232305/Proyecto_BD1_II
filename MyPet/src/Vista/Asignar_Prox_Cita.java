@@ -1,6 +1,8 @@
 package Vista;
 
 
+import Controlador.SesionActiva;
+
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.*;
@@ -18,6 +20,7 @@ public class Asignar_Prox_Cita extends javax.swing.JFrame {
         this.setLocationRelativeTo(null);
         agregarAnno(cmbAnnoCita);
         System.out.println(getNewDate());
+        SesionActiva.getInstance(null).actualizarActividad(this);
     }
 
     private void agregarAnno(JComboBox cmb){

@@ -1,5 +1,7 @@
 package Vista;
 
+import Controlador.SesionActiva;
+
 import javax.swing.*;
 
 public class Agregar_Mascota extends javax.swing.JFrame {
@@ -10,6 +12,7 @@ public class Agregar_Mascota extends javax.swing.JFrame {
         this.setSize(416, 460);
         this.setResizable(false);
         this.setLocationRelativeTo(null);
+        SesionActiva.getInstance(null).actualizarActividad(this);
     }
 
     public int getIdUsuario() {

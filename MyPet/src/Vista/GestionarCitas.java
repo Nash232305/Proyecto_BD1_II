@@ -1,5 +1,7 @@
 package Vista;
 
+import Controlador.SesionActiva;
+
 import java.util.ArrayList;
 
 public class GestionarCitas extends javax.swing.JFrame {
@@ -10,6 +12,7 @@ public class GestionarCitas extends javax.swing.JFrame {
         initComponents();
         setLocationRelativeTo(null);
         actualizarCitas();
+        SesionActiva.getInstance(null).actualizarActividad(this);
     }
 
     public void setIdUsuario(int idUsuario) {

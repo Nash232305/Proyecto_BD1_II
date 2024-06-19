@@ -1,10 +1,13 @@
 package Vista;
 
+import Controlador.SesionActiva;
+
 public class MenuGerente extends javax.swing.JFrame {
     int idUsuario;
     public MenuGerente() {
         initComponents();
         setLocationRelativeTo(null);
+        SesionActiva.getInstance(this).actualizarActividad(this);
     }
 
     @SuppressWarnings("unchecked")

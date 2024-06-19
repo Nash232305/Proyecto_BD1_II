@@ -1,6 +1,8 @@
 package Vista;
 
 
+import Controlador.SesionActiva;
+
 import java.util.*;
 import javax.swing.*;
 
@@ -14,6 +16,7 @@ public class Editar_Usuario extends javax.swing.JFrame {
         this.setSize(416, 420);
         this.setResizable(false);
         this.setLocationRelativeTo(null);
+        SesionActiva.getInstance(null).actualizarActividad(this);
     }
 
     public void setCod(int cod) {

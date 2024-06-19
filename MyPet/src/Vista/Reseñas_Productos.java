@@ -1,5 +1,7 @@
 package Vista;
 
+import Controlador.SesionActiva;
+
 import java.awt.*;
 import javax.swing.*;
 import java.util.ArrayList;
@@ -16,6 +18,7 @@ public class Reseñas_Productos extends javax.swing.JFrame {
         this.setLocationRelativeTo(null);
         refrescarLista();
         btnActualizar.setVisible(false);
+        SesionActiva.getInstance(null).actualizarActividad(this);
     }
 
     public int getSesion() {
